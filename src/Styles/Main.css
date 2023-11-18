@@ -1,0 +1,12 @@
+.content-inside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.higher {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+

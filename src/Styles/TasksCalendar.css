@@ -1,0 +1,13 @@
+.tasks-calendar {
+    border-style: double;
+    border-color: purple;
+    border-radius: 5%;
+    color: white;
+    backdrop-filter: blur(2.4px);
+}
+
+.DataGrid {
+    color: white;
+    background-color: black;
+    border-radius: 20%;
+}

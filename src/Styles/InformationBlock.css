@@ -1,0 +1,17 @@
+.informationBlock {
+    border-style: double;
+    border-color: purple;
+    border-radius: 5%;
+    text-shadow: 0 0 10px blue;
+}
+
+@font-face {
+    font-family: "SFDigital";
+    src: url("../fonts/SF Digital Readout/SfDigitalReadoutMedium.ttf");
+}
+
+.information-panel-text {
+    font-family: "SFDigital";
+    font-size: 50px;
+    color: white;
+}
