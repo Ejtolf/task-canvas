@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../Styles/InformationBlock.css";
 
 export default function InformationBlock() {
-    const [numberOfTasksForToday, setNumberOfTasksForToday] = useState(0);
-    const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState(0);
+    const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
+    const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
+    const [lastTaskTime, setLastTaskTime] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState(new Date());
 
     // Date
@@ -25,8 +26,13 @@ export default function InformationBlock() {
         <div className="informationBlock">
             <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
             <p className="information-panel-text">Date: {currentDay} of {currentMonth}</p>
+            <hr />
             <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
             <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
+            <hr />
+            <p className="information-panel-text">{
+                (lastTaskTime === 0) ? "No Tasks Today." : lastTaskTime
+            }</p>
         </div>
     );
 }

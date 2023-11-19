@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { ThemeProvider, makeStyles } from '@mui/material';
+import { ThemeProvider, createStyles, createTheme, makeStyles } from '@mui/material';
 import "../Styles/TasksCalendar.css";
+import { Theme } from '@emotion/react';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -36,17 +37,29 @@ const rows = [
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-// const dataGridTheme = makeStyles({
-// root: {
-// backgroundColor: 'black'
+// const dataGridTheme = createTheme({
+//     components {
+//     MuiDataGrid {
+//     styleOverrides {
+//     root: {
+//         '& .MuiDataGrid-root': {
+//             backgroundColor: 'your-desired-background-color',
+//             color: 'white', // Set the desired text color
+//         },
+//     }
 // }
 // });
 
 export default function TasksCalendar() {
+    // const dataGridClasses = useStyles();
+
     return (
         <div className="tasks-calendar">
             {/* <ThemeProvider theme={dataGridTheme}> */}
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{
+                height: '50vh',
+                // width: '100%'
+            }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}

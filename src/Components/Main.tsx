@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "./Header";
 import InformationBlock from "./InformationBlock";
+import TasksCalendar from "./TasksCalendar";
 
 import "../Styles/Main.css"
-import TasksCalendar from "./TasksCalendar";
 
 export default function Main() {
     return (
@@ -11,8 +11,12 @@ export default function Main() {
             <Header />
             <div className="content-inside">
                 <div className="higher">
-                    <InformationBlock />
-                    <TasksCalendar />
+                    <span className="info-span">
+                        <InformationBlock />
+                    </span>
+                    <span className="tasks-span" >
+                        <TasksCalendar />
+                    </span>
                 </div>
             </div>
         </div>
