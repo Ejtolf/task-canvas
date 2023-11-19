@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { ThemeProvider, createStyles, createTheme, makeStyles } from '@mui/material';
+import { Button, ThemeProvider, createStyles, createTheme, makeStyles } from '@mui/material';
 import "../Styles/TasksCalendar.css";
 import { Theme } from '@emotion/react';
 
 const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+    { field: 'number', headerName: '№', width: 70 },
+    { field: 'firstName', headerName: 'Task description', width: 130 },
+    { field: 'lastName', headerName: 'Time', width: 130 },
     {
         field: 'age',
-        headerName: 'Age',
+        headerName: 'Deadline',
         type: 'number',
-        width: 90,
+        width: 130,
     },
     {
         field: 'fullName',
-        headerName: 'Full name',
+        headerName: 'Status',
         description: 'This column has a value getter and is not sortable.',
         sortable: false,
         width: 160,

@@ -16,7 +16,7 @@ export default function Header() {
                         },
                         '& backgroundColor': {
                             color: "red"
-                        }
+                        },
                     },
                 },
             },

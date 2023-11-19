@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/InformationBlock.css";
+import { Button } from "@mui/material";
 
 export default function InformationBlock() {
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
@@ -30,9 +31,15 @@ export default function InformationBlock() {
             <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
             <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
             <hr />
-            <p className="information-panel-text">{
-                (lastTaskTime === 0) ? "No Tasks Today." : lastTaskTime
+            <p className="information-panel-text p-tasks-count">{
+                (lastTaskTime === 0) ?
+                    "No Tasks Today." :                     // TRUE
+                    `Tasks added today: ${lastTaskTime}`    // FALSE
             }</p>
+            {/* ---------------------------------------------------------------- */}
+            {/* <Button variant="contained" style={{
+                float: "right"
+            }}>Add New Task</Button> */}
         </div>
     );
 }

@@ -3,6 +3,7 @@
     border-color: purple;
     border-radius: 5%;
     text-shadow: 0 0 10px blue;
+    height: 50vh;
 }
 
 @font-face {
@@ -16,4 +17,9 @@
     color: white;
     margin-left: 15px;
     margin-top: 10px;
+}
+
+.p-tasks-count {
+    text-shadow: 0 0 10px yellow;
+    color: white;
 }
