@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 export default function InformationBlock() {
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
-    const [lastTaskTime, setLastTaskTime] = useState<number>(0);
+    const [lastTaskTime, setLastTaskTime] = useState<string | number | Date>(0);
     const [currentTime, setCurrentTime] = useState(new Date());
 
     // Date
@@ -23,6 +23,11 @@ export default function InformationBlock() {
         return () => clearInterval(interval);
     }, []);
 
+    const handleAddTask = () => {
+        setNumberOfTasksForToday(numberOfTasksForToday + 1);
+        setLastTaskTime(currentTime.toLocaleTimeString());
+    }
+
     return (
         <div className="informationBlock">
             <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
@@ -34,12 +39,12 @@ export default function InformationBlock() {
             <p className="information-panel-text p-tasks-count">{
                 (lastTaskTime === 0) ?
                     "No Tasks Today." :                     // TRUE
-                    `Tasks added today: ${lastTaskTime}`    // FALSE
+                    `Last task added at ${lastTaskTime}`    // FALSE
             }</p>
             {/* ---------------------------------------------------------------- */}
-            {/* <Button variant="contained" style={{
+            <Button variant="contained" onClick={handleAddTask} style={{
                 float: "right"
-            }}>Add New Task</Button> */}
+            }}>Add New Task</Button>
         </div>
     );
 }
