@@ -34,6 +34,11 @@
     text-shadow: 0 0 1px cyan;
 }
 
+.MuiToolbar-gutters,
+.MuiSvgIcon-root {
+    color: white;
+}
+
 .MuiDataGrid-cell:hover {
     text-shadow: 0 0 5px cyan;
     transition: all 5ms ease;
