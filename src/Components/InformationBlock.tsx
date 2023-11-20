@@ -7,8 +7,9 @@ export default function InformationBlock() {
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
     const [lastTaskTime, setLastTaskTime] = useState<string | number | Date>(0);
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [tasksRemains, setTasksRemains] = useState<string | number>(0);
 
-    // Date
+    // DATE
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const today = new Date();
     const currentDay = today.getDate();
@@ -30,21 +31,35 @@ export default function InformationBlock() {
 
     return (
         <div className="informationBlock">
-            <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
-            <p className="information-panel-text">Date: {currentDay} of {currentMonth}</p>
-            <hr />
-            <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
-            <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
-            <hr />
-            <p className="information-panel-text p-tasks-count">{
-                (lastTaskTime === 0) ?
-                    "No Tasks Today." :                     // TRUE
-                    `Last task added at ${lastTaskTime}`    // FALSE
-            }</p>
-            {/* ---------------------------------------------------------------- */}
-            <Button variant="contained" onClick={handleAddTask} style={{
-                float: "right"
-            }}>Add New Task</Button>
+            <div className="left-column">
+                <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
+                <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
+                <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
+                <p className="information-panel-text">{
+                    (numberOfTasksForToday === 0) ?
+                        "All tasks done." :                     // TRUE
+                        `Tasks remains: ${tasksRemains}`                                      // FALSE
+                }</p>
+            </div>
+            <div className="right-column">
+                <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
+                <p className="information-panel-text">Date: {currentDay} of {currentMonth}</p>
+            </div>
+            <div className="bottom">
+                <div className="last-task-div">
+                    <p className="information-panel-text p-tasks-count">{
+                        (lastTaskTime === 0) ?
+                            "No Tasks Today." :                     // TRUE
+                            `Last task added at ${lastTaskTime}`    // FALSE
+                    }</p>
+                </div>
+                {/* ---------------------------------------------------------------- */}
+                <div className="manager-buttons">
+                    <Button variant="contained" onClick={handleAddTask} style={{
+                    }}>Add New Task</Button>
+                    <Button variant="contained">Clear completed tasks</Button>
+                </div>
+            </div>
         </div>
     );
 }

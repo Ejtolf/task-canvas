@@ -19,7 +19,37 @@
     margin-top: 10px;
 }
 
+.left-column,
+.right-column {
+    width: 50%;
+    float: left;
+}
+
+.bottom {
+    /* display: flex; */
+    clear: both;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+@keyframes textShadowAnimation {
+    0% {
+      text-shadow: 0 0 10px yellow;
+    }
+    50% {
+      text-shadow: 0 0 10px red; /* Change orange to red for consistency with previous examples */
+    }
+    100% {
+      text-shadow: 0 0 10px yellow;
+    }
+}
+  
 .p-tasks-count {
-    text-shadow: 0 0 10px yellow;
     color: white;
+    animation: textShadowAnimation 1s linear infinite;
+}
+
+.manager-buttons {
+    float: right;
+    margin-bottom: 5px;
 }
