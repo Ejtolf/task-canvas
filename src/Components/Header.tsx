@@ -9,10 +9,10 @@ export default function Header() {
                 styleOverrides: {
                     root: {
                         '& .MuiInputBase-input': {
-                            color: 'blue', // Устанавливаем желаемый цвет текста в TextField
+                            color: 'blue',
                         },
                         '& label': {
-                            color: 'blue', // Устанавливаем желаемый цвет текста метки в TextField
+                            color: 'blue',
                         },
                         '& backgroundColor': {
                             color: "red"

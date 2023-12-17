@@ -53,3 +53,32 @@
 .PrivateSwitchBase-input {
     color: white;
 }
+
+@keyframes textShadowAnimation {
+    0% {
+      text-shadow: 0 0 10px yellow;
+    }
+    50% {
+      text-shadow: 0 0 10px red;
+    }
+    100% {
+      text-shadow: 0 0 10px yellow;
+    }
+}
+  
+.new-task-title {
+    color: white;
+    animation: textShadowAnimation 1s linear infinite;
+    text-align: center;
+}
+
+.form-labels {
+    color: white;
+    font-size: 25px;
+}
+
+.form-inputs {
+    background-color: blue;
+    color: red;
+    font-size: 25px;
+}

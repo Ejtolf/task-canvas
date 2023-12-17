@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Styles/InformationBlock.css";
 import { Button, Slide, SlideProps, Snackbar, Typography } from "@mui/material";
-import { TransitionProps } from "@mui/material/transitions";
+// import { TransitionProps } from "@mui/material/transitions";
+import IsTaskPrepairingContext from "../Context/taskPrepairingContext";
 
-export default function InformationBlock() {
+const InformationBlock: React.FC = () => {
+    const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext)
+    const [taskIsPrepairing, setTaskIsPrepairing] = useState(false);
+
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
     const [lastTaskTime, setLastTaskTime] = useState<string | number | Date>(0);
@@ -16,9 +20,6 @@ export default function InformationBlock() {
     const currentDay = today.getDate();
     const currentMonth = months[today.getMonth()];
 
-    // TYPES
-    // type TransitionProps = Omit<SlideProps, "direction">;
-
     // CLOCK
     useEffect(() => {
         const interval = setInterval(() => {
@@ -28,25 +29,20 @@ export default function InformationBlock() {
         return () => clearInterval(interval);
     }, []);
 
-    // const TransitionDown = (props: TransitionProps) => {
-    //     return <Slide {...props} direction="down" />;
-    // }
 
-    const handleAddTask = () => {
+    const handleAddTask = () => {         //TODO
+        setTaskIsPrepairing(!taskIsPrepairing);
         setNumberOfTasksForToday(numberOfTasksForToday + 1);
         setLastTaskTime(currentTime.toLocaleTimeString());
-
-        // const [transition, setTransition] = React.useState<React.ComponentType<TransitionProps> | undefined>(undefined);
-
-        // setTransition(() => Transition);
+        setTaskIsPrepairing(!taskIsPrepairing);
+        setIsTaskPreparing(taskIsPrepairing);
     }
 
-    const handleDeleteAllTasks = () => { //TODO: This is test function. Then it must be changed to be useful.
-        setNumberOfTasksForToday(0);
+    const handleDeleteAllTasks = () => { //TODO
+        setNumberOfTasksForToday(0);     //!
         setNumberOfTasksForTomorrow(0);
         setLastTaskTime(0);
         setTasksRemains(0);
-
     }
 
     return (
@@ -57,28 +53,33 @@ export default function InformationBlock() {
                 <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
                 <p className="information-panel-text">{
                     (numberOfTasksForToday === 0) ?
-                        "All tasks done." :                     // TRUE
-                        `Tasks remains: ${tasksRemains}`                                      // FALSE
+                        "All tasks done." :
+                        `Tasks remains: ${tasksRemains}`
                 }</p>
             </div>
             <div className="right-column">
                 <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
-                <p className="information-panel-text">Date: {currentDay} of {currentMonth}</p>
+                <p className="information-panel-text">Date: The {currentDay} of {currentMonth}</p>
             </div>
             <div className="bottom">
                 <div className="last-task-div">
                     <p className="information-panel-text p-tasks-count">{
                         (lastTaskTime === 0) ?
-                            "No Tasks Today." :                     // TRUE
-                            `Last task added at ${lastTaskTime}`    // FALSE
+                            "No Tasks Today." :
+                            `Last task added at ${lastTaskTime}`
                     }</p>
                 </div>
                 {/* ---------------------------------------------------------------- */}
                 <div className="manager-buttons">
+                    {/* //! After this button was clicked `taskIsPrepairing` must be changed.
+                    //! Then `taskIsPrepairing` must be used in `TasksCalendar.tsx`. */}
                     <Button variant="contained" onClick={handleAddTask}>Add New Task</Button>
+                    {/* //! End */}
                     <Button variant="contained" onClick={handleDeleteAllTasks}>Clear completed tasks</Button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
+
+export default InformationBlock;

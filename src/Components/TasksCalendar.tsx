@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button, ThemeProvider, createStyles, createTheme, makeStyles } from '@mui/material';
+import IsTaskPrepairingContext from '../Context/taskPrepairingContext';
+
 import "../Styles/TasksCalendar.css";
-import { Theme } from '@emotion/react';
 
 const columns: GridColDef[] = [
     { field: 'number', headerName: '№', width: 70 },
@@ -37,22 +38,7 @@ const rows = [
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-// const dataGridTheme = createTheme({
-//     components {
-//     MuiDataGrid {
-//     styleOverrides {
-//     root: {
-//         '& .MuiDataGrid-root': {
-//             backgroundColor: 'your-desired-background-color',
-//             color: 'white', // Set the desired text color
-//         },
-//     }
-// }
-// });
-
-export default function TasksCalendar() {
-    // const dataGridClasses = useStyles();
-
+const TaskGridComponent: React.FC = () => {
     return (
         <div className="tasks-calendar">
             {/* <ThemeProvider theme={dataGridTheme}> */}
@@ -74,5 +60,29 @@ export default function TasksCalendar() {
             </div>
             {/* </ThemeProvider> */}
         </div>
-    );
+    )
 }
+
+const TaskPrepairingComponent: React.FC = () => {
+    return (
+        <div>
+            <h1 className="new-task-title">New Task</h1>
+            <hr />
+            <label className="form-labels" htmlFor="name-field">Your name: </label>
+            <input className="form-inputs" name="name-field" />
+        </div>
+    )
+}
+
+const TasksCalendar: React.FC = () => {
+    const { isTaskPreparing } = React.useContext(IsTaskPrepairingContext)
+    return (
+        <>
+            {isTaskPreparing ? <TaskPrepairingComponent /> : <TaskGridComponent />}
+        </>
+    );
+    //         {/* <h1 style={{ color: "white" }}>{String(isTaskPreparing)}</h1> */}
+}
+
+export default TasksCalendar;
+
