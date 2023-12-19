@@ -1,84 +1,103 @@
 .tasks-calendar {
-    border-style: double;
-    border-color: purple;
-    border-radius: 5%;
-    color: white;
-    backdrop-filter: blur(2.4px);
-    height: 50vh;
+  border-style: double;
+  border-color: purple;
+  border-radius: 5%;
+  color: white;
+  backdrop-filter: blur(2.4px);
+  height: 50vh;
 }
 
 @keyframes DataGridBackground {
-    0% {
-        box-shadow: 0 0 10px red;
-    } 
-    50% {
-        box-shadow: 0 0 10px purple;
-    }
-    100% {
-        box-shadow: 0 0 10px red;
-    }
+  0% {
+    box-shadow: 0 0 10px red;
+  }
+  50% {
+    box-shadow: 0 0 10px purple;
+  }
+  100% {
+    box-shadow: 0 0 10px red;
+  }
 }
 
 .MuiDataGrid-root {
-    background-color: hsla(240, 100%, 36%, 0.15);
-    backdrop-filter: blur(40);
-    /* Animation */
-    border-style: none;
-    animation-name: DataGridBackground;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
+  background-color: hsla(240, 100%, 36%, 0.15);
+  backdrop-filter: blur(40);
+  /* Animation */
+  border-style: none;
+  animation-name: DataGridBackground;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
 }
 
 .MuiDataGrid-cell {
-    color: white;
-    text-shadow: 0 0 1px cyan;
+  color: white;
+  text-shadow: 0 0 1px cyan;
 }
 
 .MuiToolbar-gutters,
 .MuiSvgIcon-root {
-    color: white;
+  color: white;
 }
 
 .MuiDataGrid-cell:hover {
-    text-shadow: 0 0 5px cyan;
-    transition: all 5ms ease;
-    font-size: larger;
+  text-shadow: 0 0 5px cyan;
+  transition: all 5ms ease;
+  font-size: larger;
 }
 
 .MuiDataGrid-columnHeaderTitle {
-    color: white !important;
-    text-shadow: 0 0 5px purple;
+  color: white !important;
+  text-shadow: 0 0 5px purple;
 }
 
 .PrivateSwitchBase-input {
-    color: white;
+  color: white;
 }
 
 @keyframes textShadowAnimation {
-    0% {
-      text-shadow: 0 0 10px yellow;
-    }
-    50% {
-      text-shadow: 0 0 10px red;
-    }
-    100% {
-      text-shadow: 0 0 10px yellow;
-    }
+  0% {
+    text-shadow: 0 0 10px yellow;
+  }
+  50% {
+    text-shadow: 0 0 10px red;
+  }
+  100% {
+    text-shadow: 0 0 10px yellow;
+  }
 }
-  
+
+.new-task-form {
+  border-style: double;
+  border-color: purple;
+  border-radius: 5%;
+  color: white;
+  backdrop-filter: blur(2.4px);
+  height: 50vh;
+}
+
 .new-task-title {
-    color: white;
-    animation: textShadowAnimation 1s linear infinite;
-    text-align: center;
+  color: white;
+  animation: textShadowAnimation 1s linear infinite;
+  text-align: center;
 }
 
-.form-labels {
-    color: white;
-    font-size: 25px;
+.form-label {
+  color: white;
+  font-size: 15px;
+  margin-left: 10%;
 }
 
-.form-inputs {
-    background-color: blue;
-    color: red;
-    font-size: 25px;
+.form-input {
+  background-color: #000033;
+  color: white;
+  text-shadow: 0 0 5px cyan;
+  font-size: 15px;
+  float: right;
+  margin-right: 10%;
+}
+
+.new-task-buttons-span {
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
 }

@@ -71,10 +71,7 @@ const InformationBlock: React.FC = () => {
                 </div>
                 {/* ---------------------------------------------------------------- */}
                 <div className="manager-buttons">
-                    {/* //! After this button was clicked `taskIsPrepairing` must be changed.
-                    //! Then `taskIsPrepairing` must be used in `TasksCalendar.tsx`. */}
                     <Button variant="contained" onClick={handleAddTask}>Add New Task</Button>
-                    {/* //! End */}
                     <Button variant="contained" onClick={handleDeleteAllTasks}>Clear completed tasks</Button>
                 </div>
             </div>

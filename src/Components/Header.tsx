@@ -1,6 +1,7 @@
 import React from "react";
-import "../Styles/Header.css";
 import { TextField, ThemeProvider, createTheme } from "@mui/material";
+import LOGO from "../media/logo.png";
+import "../Styles/Header.css";
 
 export default function Header() {
     const theme = createTheme({
@@ -27,6 +28,7 @@ export default function Header() {
     return (
         <div className="header">
             <div className="search-panel">
+                <img src={LOGO} alt="TaskCanvas" height="100" />
                 <ThemeProvider theme={theme}>
                     <TextField className="searchfield" label="Search..." variant="filled" />
                 </ThemeProvider>

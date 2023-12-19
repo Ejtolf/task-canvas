@@ -1,54 +1,55 @@
 .informationBlock {
-    border-style: double;
-    border-color: purple;
-    border-radius: 5%;
-    text-shadow: 0 0 10px blue;
-    height: 50vh;
+  border-style: double;
+  border-color: purple;
+  border-radius: 5%;
+  color: white;
+  backdrop-filter: blur(2.4px);
+  height: 50vh;
 }
 
 @font-face {
-    font-family: "SFDigital";
-    src: url("../fonts/SF Digital Readout/SfDigitalReadoutMedium.ttf");
+  font-family: "SFDigital";
+  src: url("../fonts/SF Digital Readout/SfDigitalReadoutMedium.ttf");
 }
 
 .information-panel-text {
-    font-family: "SFDigital";
-    font-size: 30px;
-    color: white;
-    margin-left: 15px;
-    margin-top: 10px;
+  font-family: "SFDigital";
+  font-size: 30px;
+  color: white;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .left-column,
 .right-column {
-    width: 50%;
-    float: left;
+  width: 50%;
+  float: left;
 }
 
 .bottom {
-    /* display: flex; */
-    clear: both;
-    margin-bottom: 5px;
+  /* display: flex; */
+  clear: both;
+  margin-bottom: 5px;
 }
 
 @keyframes textShadowAnimation {
-    0% {
-      text-shadow: 0 0 10px yellow;
-    }
-    50% {
-      text-shadow: 0 0 10px red; /* Change orange to red for consistency with previous examples */
-    }
-    100% {
-      text-shadow: 0 0 10px yellow;
-    }
+  0% {
+    text-shadow: 0 0 10px yellow;
+  }
+  50% {
+    text-shadow: 0 0 10px red; /* Change orange to red for consistency with previous examples */
+  }
+  100% {
+    text-shadow: 0 0 10px yellow;
+  }
 }
-  
+
 .p-tasks-count {
-    color: white;
-    animation: textShadowAnimation 1s linear infinite;
+  color: white;
+  animation: textShadowAnimation 1s linear infinite;
 }
 
 .manager-buttons {
-    float: right;
-    margin-bottom: 5px;
+  float: right;
+  margin-bottom: 5px;
 }
