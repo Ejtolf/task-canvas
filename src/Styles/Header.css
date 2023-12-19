@@ -32,6 +32,8 @@
 
 .logo {
   margin-right: 10px;
+  display: flex;
+  padding: 5px;
 }
 
 .searchfield-container {

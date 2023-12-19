@@ -28,11 +28,17 @@ export default function Header() {
     return (
         <div className="header">
             <div className="search-panel">
-                <img src={LOGO} alt="TaskCanvas" height="100" />
-                <ThemeProvider theme={theme}>
-                    <TextField className="searchfield" label="Search..." variant="filled" />
-                </ThemeProvider>
+                <div className="logo">
+                    <img src={LOGO} alt="TaskCanvas" height="100" />
+                    <h1>TaskCanvas</h1>
+                </div>
+                <div className="searchfield-container">
+                    <ThemeProvider theme={theme}>
+                        <TextField className="searchfield" label="Search..." variant="filled" />
+                    </ThemeProvider>
+                </div>
             </div>
         </div>
+
     )
 }
