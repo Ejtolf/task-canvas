@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button, TextField, ThemeProvider, createStyles, createTheme, makeStyles } from '@mui/material';
@@ -7,45 +7,23 @@ import IsTaskPrepairingContext from '../Context/taskPrepairingContext';
 import "../Styles/TasksCalendar.css";
 
 const columns: GridColDef[] = [
-    { field: 'number', headerName: '№', width: 70 },
-    { field: 'firstName', headerName: 'Task description', width: 130 },
-    { field: 'lastName', headerName: 'Time', width: 130 },
-    {
-        field: 'age',
-        headerName: 'Deadline',
-        type: 'number',
-        width: 130,
-    },
-    {
-        field: 'fullName',
-        headerName: 'Status',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (params: GridValueGetterParams) =>
-            `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
+    { field: 'id', headerName: '№', width: 70 },
+    { field: 'taskDescription', headerName: 'Task description', width: 130 },
+    { field: 'time', headerName: 'Time', width: 130 },
+    { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
+    { field: 'taskStatus', headerName: 'Status', width: 160 },
 ];
 
 const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    { id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" }
 ];
+
 
 const TaskGridComponent: React.FC = () => {
     return (
         <div className="tasks-calendar">
-            {/* <ThemeProvider theme={dataGridTheme}> */}
             <div style={{
                 height: '50vh',
-                // width: '100%'
             }}>
                 <DataGrid
                     rows={rows}
@@ -66,9 +44,12 @@ const TaskGridComponent: React.FC = () => {
 
 const TaskPrepairingComponent: React.FC = () => {
     const [testText, setTestText] = useState("First variation");
+    const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState(true);
+    const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext);
 
-    const handleChangeText = () => {
-        setTestText("Second variation");
+    const handleAddTaskToTableGrid = () => {
+        rows.push({ id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" });
+        setIsTaskPreparing(!taskIsPrepairingNow);
     }
 
     return (
@@ -85,7 +66,7 @@ const TaskPrepairingComponent: React.FC = () => {
             </span>
             <br />
             <span className="new-task-buttons-span">
-                <Button variant="contained" onClick={handleChangeText}>Accept</Button>
+                <Button variant="contained" onClick={handleAddTaskToTableGrid}>Accept</Button>
                 <Button variant="contained">Cancel</Button>
             </span>
         </div>
