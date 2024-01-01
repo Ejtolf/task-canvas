@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { useState } from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Button, TextField, ThemeProvider, createStyles, createTheme, makeStyles } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import IsTaskPrepairingContext from '../Context/taskPrepairingContext';
+import CustomizedSnackbars from './Snackbars/Sliders';
 
 import "../Styles/TasksCalendar.css";
 
@@ -43,8 +44,10 @@ const TaskGridComponent: React.FC = () => {
 }
 
 const TaskPrepairingComponent: React.FC = () => {
-    const [testText, setTestText] = useState("First variation");
     const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState(true);
+    const [taskTitle, setTaskTitle] = useState("");
+    const [inputedText, setInputedText] = useState("");
+    const [deadlineTime, setDeadlineTime] = useState("");
     const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext);
 
     const handleAddTaskToTableGrid = () => {
@@ -52,22 +55,51 @@ const TaskPrepairingComponent: React.FC = () => {
         setIsTaskPreparing(!taskIsPrepairingNow);
     }
 
+    //! ----
+
+    const formatText = () => {
+        let formattedText = inputedText;
+
+        formattedText = formattedText.replace(/\*(.*?)\*/g, '<strong>$1</strong>'); // жирный
+        formattedText = formattedText.replace(/_(.*?)_/g, '<em>$1</em>'); // курсив
+
+        setInputedText(formattedText);
+    };
+
+    //! ----
+
     return (
         <div className="new-task-form">
             <h1 className="new-task-title">New Task</h1>
-            <h1 className="new-task-title">{testText}</h1>
             <hr />
-            <span className="new-task-span">
-                <label className="form-label" htmlFor="task-desc-field">Task description:</label>
-                <input className="form-input" name="task-desc-field" placeholder="Enter the task description" />
-                <br /><br />
-                <label className="form-label" htmlFor="deadline-field">Deadline:</label>
-                <input className="form-input" type="date" name="task-desc-field" placeholder="Enter the deadline" />
-            </span>
+            <div className="new-task-span-head">
+                <div className="left-section">
+                    <input className="title-input" value={taskTitle} type="text" placeholder="Task title" onChange={(e) => setTaskTitle(e.target.value)} />
+                </div>
+                <div className="right-section">
+                    <div className="deadline-label">deadline time:</div>
+                    <input className="deadline-input" type="date" />
+                </div>
+            </div>
+            <hr />
+            <div>
+                <textarea value={inputedText} className="task-description-input" placeholder="Task description and detailed information.
+In the task table, you will only see the title; when you open it, you will be able to see this description, so:
+- Enter the necessary details here, follow the text format;
+- If necessary, format the text, making it *bold*, _italic_, ~underlined~, or !highlighted!." onChange={(e) => setInputedText(e.target.value)} />
+            </div>
             <br />
             <span className="new-task-buttons-span">
-                <Button variant="contained" onClick={handleAddTaskToTableGrid}>Accept</Button>
-                <Button variant="contained">Cancel</Button>
+                <Button variant="contained" onClick={() => {
+                    if (taskTitle.trim() === " " && inputedText.trim() === " ") {
+                        formatText();
+                    } else {
+                        // return <CustomizedSnackbars />
+                        console.log();
+                        //! TO MAKE A SLIDER
+                    }
+                }}>Add to datagrid</Button>
+                {/* <Button variant="contained">Cancel</Button> */}
             </span>
         </div>
     )

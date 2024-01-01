@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../Styles/InformationBlock.css";
 import { Button, Slide, SlideProps, Snackbar, Typography } from "@mui/material";
-// import { TransitionProps } from "@mui/material/transitions";
+// import CustomizedSnackbars from "./Snackbars/Sliders";
 import IsTaskPrepairingContext from "../Context/taskPrepairingContext";
+import "../Styles/InformationBlock.css";
 
 const InformationBlock: React.FC = () => {
     const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext)
@@ -71,7 +71,9 @@ const InformationBlock: React.FC = () => {
                 </div>
                 {/* ---------------------------------------------------------------- */}
                 <div className="manager-buttons">
-                    <Button variant="contained" onClick={handleAddTask}>Add New Task</Button>
+                    <Button variant="contained" onClick={handleAddTask}>{
+                        taskIsPrepairing ? "Add New Task" : "Cancel"
+                    }</Button>
                     <Button variant="contained" onClick={handleDeleteAllTasks}>Clear completed tasks</Button>
                 </div>
             </div>
