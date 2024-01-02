@@ -5,28 +5,23 @@ import Stack from '@mui/material/Stack';
 
 interface CustomizedSnackbarsProps {
     handleClick: () => void;
+    alertOpen: boolean;
+    message: string;
 }
 
-export default function CustomizedSnackbars({ handleClick }: CustomizedSnackbarsProps) {
-    const [open, setOpen] = React.useState(false);
-
-    const handleButtonClick = () => {
-        handleClick();
-        setOpen(true);
-    };
-
+export default function CustomizedSnackbars({ handleClick, alertOpen, message }: CustomizedSnackbarsProps) {
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }
-        setOpen(false);
+        handleClick();
     };
 
     return (
         <Stack spacing={2} sx={{ width: '100%' }}>
-            <Snackbar open={open} autoHideDuration={6000} onClose={() => handleClose()}>
+            <Snackbar open={alertOpen} autoHideDuration={6000} onClose={() => handleClose()}>
                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    This is a success message!
+                    {message}
                 </Alert>
             </Snackbar>
         </Stack>
