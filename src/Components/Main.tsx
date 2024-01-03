@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import InformationBlock from "./InformationBlock";
 import TasksCalendar from "./TasksCalendar";
+import TaskDetailed from "./taskDetailed";
 
 import "../Styles/Main.css"
 
@@ -17,6 +18,9 @@ export default function Main() {
                     <span className="tasks-span" >
                         <TasksCalendar />
                     </span>
+                </div>
+                <div className="lower">
+                    <TaskDetailed />
                 </div>
             </div>
         </div>

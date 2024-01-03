@@ -20,9 +20,10 @@ const rows = [
 ];
 
 interface Task {
+    index: number;
     title: string;
     description?: string;
-    deadline: string;
+    deadline?: string;
     isImportant: boolean;
     isUrgently: boolean;
 }
@@ -51,17 +52,42 @@ const TaskGridComponent: React.FC = () => {
 }
 
 const TaskPrepairingComponent: React.FC = () => {
-    const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState(true);
+    const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext);
+    const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState([]);
     const [taskTitle, setTaskTitle] = useState("");
     const [inputedText, setInputedText] = useState("");
     const [deadlineTime, setDeadlineTime] = useState("");
     const [openAlert, setOpenAlert] = useState(false);
-
-    const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext);
+    const [taskList, setTaskList] = useState<Task[]>([]);
+    const [task, setTask] = useState<Task>(
+        {
+            index: 0,
+            title: "",
+            description: "",
+            deadline: "",
+            isImportant: true,
+            isUrgently: true
+        }
+    );
 
     const handleAddTaskToTableGrid = () => {
-        rows.push({ id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" });
-        setIsTaskPreparing(!taskIsPrepairingNow);
+        // rows.push({ id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" });
+        // setIsTaskPreparing(!taskIsPrepairingNow);
+        const newTask: Task = {
+            index: taskList.length + 1,
+            title: taskTitle,
+            description: inputedText,
+            deadline: deadlineTime,
+            isImportant: true,
+            isUrgently: true
+        };
+
+        for (let i = 0; i < taskList.length; i++) {
+            console.log(taskList[i]);
+        }
+
+        setTaskList([...taskList, newTask]);
+        // setTaskList([...taskList, newTask]);
     }
 
     const formatText = () => {
@@ -104,6 +130,7 @@ In the task table, you will only see the title; when you open it, you will be ab
                         formatText();
                         // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"!"} />
                         //! ADD LOGIC HERE.
+                        handleAddTaskToTableGrid();
                     } else {
                         // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"?"} />
                         console.log("...");
