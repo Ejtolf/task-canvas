@@ -1,28 +1,3 @@
-/* .content-inside {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.higher {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    height: 50%;
-    width: 100%;
-    margin: 0%;
-    overflow: hidden;
-}
-
-.info-span,
-.tasks-span {
-    flex: 1;
-    overflow: auto;
-    padding: 1px;
-    height: 100%;
-}
- */
-
 @keyframes hasBeenAppeared {
   from {
     opacity: 0%;
