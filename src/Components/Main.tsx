@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import InformationBlock from "./InformationBlock";
 import TasksCalendar from "./TasksCalendar";
-import TaskDetailed from "./taskDetailed";
+import TaskDetailed from "./TaskDetailed";
 
 import "../Styles/Main.css"
 
@@ -20,7 +20,15 @@ export default function Main() {
                     </span>
                 </div>
                 <div className="lower">
-                    <TaskDetailed />
+                    <div className="task-detailed">
+                        <TaskDetailed />
+                    </div>
+                    <div className="task-info">
+                        //! ...
+                        <div style={{ backgroundColor: "red" }}>
+                            dgsdgsds
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

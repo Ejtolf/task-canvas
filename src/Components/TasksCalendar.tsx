@@ -6,6 +6,7 @@ import IsTaskPrepairingContext from '../Context/taskPrepairingContext';
 import CustomizedSnackbars from './Snackbars/Sliders';
 
 import "../Styles/TasksCalendar.css";
+import { TaskContext } from '../Context/tasksContext';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: '№', width: 70 },
@@ -20,12 +21,13 @@ const rows = [
 ];
 
 interface Task {
-    index: number;
-    title: string;
-    description?: string;
-    deadline?: string;
-    isImportant: boolean;
-    isUrgently: boolean;
+    index: number,
+    title: string,
+    description?: string,
+    deadline?: string,
+    isImportant: boolean,
+    isUrgently: boolean,
+    isCompleted: boolean
 }
 
 const TaskGridComponent: React.FC = () => {
@@ -53,12 +55,12 @@ const TaskGridComponent: React.FC = () => {
 
 const TaskPrepairingComponent: React.FC = () => {
     const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext);
+    const {taskList, setTaskList} = useContext(TaskContext);
     const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState([]);
     const [taskTitle, setTaskTitle] = useState("");
     const [inputedText, setInputedText] = useState("");
     const [deadlineTime, setDeadlineTime] = useState("");
     const [openAlert, setOpenAlert] = useState(false);
-    const [taskList, setTaskList] = useState<Task[]>([]);
     const [task, setTask] = useState<Task>(
         {
             index: 0,
@@ -66,7 +68,8 @@ const TaskPrepairingComponent: React.FC = () => {
             description: "",
             deadline: "",
             isImportant: true,
-            isUrgently: true
+            isUrgently: true,
+            isCompleted: false
         }
     );
 
@@ -79,7 +82,8 @@ const TaskPrepairingComponent: React.FC = () => {
             description: inputedText,
             deadline: deadlineTime,
             isImportant: true,
-            isUrgently: true
+            isUrgently: true,
+            isCompleted: false
         };
 
         for (let i = 0; i < taskList.length; i++) {

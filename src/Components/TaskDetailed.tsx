@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Styles/TaskDetailed.css";
+import "../Styles/TaskDetailed.css";
 
 const TaskDetailed: React.FC = () => {
     return (
