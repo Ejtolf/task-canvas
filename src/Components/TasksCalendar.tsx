@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useState } from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button, Alert, FormControl, FormControlLabel, Checkbox } from '@mui/material';
-import IsTaskPrepairingContext from '../Context/taskPrepairingContext';
+import IsTaskPreparingContext from '../Context/contexts';
 import CustomizedSnackbars from './Snackbars/Sliders';
 
 import "../Styles/TasksCalendar.css";
@@ -53,10 +53,10 @@ const TaskGridComponent: React.FC = () => {
     )
 }
 
-const TaskPrepairingComponent: React.FC = () => {
-    const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext);
-    const {taskList, setTaskList} = useContext(TaskContext);
-    const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState([]);
+const TaskPreparingComponent: React.FC = () => {
+    const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
+    // const { taskList, setTaskList } = useContext(TaskContext);
+    // const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState([]);
     const [taskTitle, setTaskTitle] = useState("");
     const [inputedText, setInputedText] = useState("");
     const [deadlineTime, setDeadlineTime] = useState("");
@@ -77,7 +77,7 @@ const TaskPrepairingComponent: React.FC = () => {
         // rows.push({ id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" });
         // setIsTaskPreparing(!taskIsPrepairingNow);
         const newTask: Task = {
-            index: taskList.length + 1,
+            index: 2,
             title: taskTitle,
             description: inputedText,
             deadline: deadlineTime,
@@ -86,11 +86,11 @@ const TaskPrepairingComponent: React.FC = () => {
             isCompleted: false
         };
 
-        for (let i = 0; i < taskList.length; i++) {
-            console.log(taskList[i]);
-        }
+        // for (let i = 0; i < taskList.length; i++) {
+        // console.log(taskList[i]);
+        // }
 
-        setTaskList([...taskList, newTask]);
+        // setTaskList([...taskList, newTask]);
         // setTaskList([...taskList, newTask]);
     }
 
@@ -127,7 +127,7 @@ In the task table, you will only see the title; when you open it, you will be ab
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Important" />
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" />
             </div>
-            <br />
+            {/* <br /> */}
             <span className="new-task-buttons-span">
                 <Button variant="contained" onClick={() => {
                     if (taskTitle.trim() === " " && inputedText.trim() === " ") {
@@ -152,12 +152,13 @@ In the task table, you will only see the title; when you open it, you will be ab
 }
 
 const TasksCalendar: React.FC = () => {
-    const { isTaskPreparing } = React.useContext(IsTaskPrepairingContext)
+    const { isTaskPreparing } = useContext(IsTaskPreparingContext);
+
     return (
         <>
-            {isTaskPreparing ? <TaskPrepairingComponent /> : <TaskGridComponent />}
+            {isTaskPreparing ? <TaskPreparingComponent /> : <TaskGridComponent />}
         </>
-    );
+    )
 }
 
 export default TasksCalendar;

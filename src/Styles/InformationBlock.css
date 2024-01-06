@@ -21,6 +21,12 @@
   margin-top: 10px;
 }
 
+.information-panel-text:hover {
+  background-color: #000033;
+  text-shadow: 0 0 10px yellow;
+  transition: all 0.01s ease-in;
+}
+
 .left-column,
 .right-column {
   width: 50%;

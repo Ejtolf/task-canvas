@@ -25,9 +25,9 @@ export default function Main() {
                     </div>
                     <div className="task-info">
                         //! ...
-                        <div style={{ backgroundColor: "red" }}>
-                            dgsdgsds
-                        </div>
+                        {/* <div style={{ backgroundColor: "red" }}> */}
+                        {/* dgsdgsds */}
+                        {/* </div> */}
                     </div>
                 </div>
             </div>

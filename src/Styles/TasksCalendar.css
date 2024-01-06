@@ -6,6 +6,7 @@
   backdrop-filter: blur(2.4px);
   height: 50vh;
   width: 100%;
+  overflow-y: scroll;
 }
 
 @keyframes DataGridBackground {

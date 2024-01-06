@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Slide, SlideProps, Snackbar, Typography } from "@mui/material";
 // import CustomizedSnackbars from "./Snackbars/Sliders";
-import IsTaskPrepairingContext from "../Context/taskPrepairingContext";
+import IsTaskPreparingContext from "../Context/contexts";
 import "../Styles/InformationBlock.css";
 
 const InformationBlock: React.FC = () => {
-    const { setIsTaskPreparing } = useContext(IsTaskPrepairingContext)
-    const [taskIsPrepairing, setTaskIsPrepairing] = useState(false);
+    const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
+    // const [taskPreparingState, setTaskPreparingState] = useState<boolean>(false);
 
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
@@ -29,17 +29,13 @@ const InformationBlock: React.FC = () => {
         return () => clearInterval(interval);
     }, []);
 
-
-    const handleAddTask = () => {         //TODO
-        setTaskIsPrepairing(!taskIsPrepairing);
-        setNumberOfTasksForToday(numberOfTasksForToday + 1);
-        setLastTaskTime(currentTime.toLocaleTimeString());
-        setTaskIsPrepairing(!taskIsPrepairing);
-        setIsTaskPreparing(taskIsPrepairing);
+    const handleChangeTaskPreparation = () => { //!...
+        setIsTaskPreparing(!isTaskPreparing);
+        console.log(isTaskPreparing);
     }
 
-    const handleDeleteAllTasks = () => { //TODO
-        setNumberOfTasksForToday(0);     //!
+    const handleDeleteAllTasks = () => {
+        setNumberOfTasksForToday(0);
         setNumberOfTasksForTomorrow(0);
         setLastTaskTime(0);
         setTasksRemains(0);
@@ -71,10 +67,10 @@ const InformationBlock: React.FC = () => {
                 </div>
                 {/* ---------------------------------------------------------------- */}
                 <div className="manager-buttons">
-                    <Button variant="contained" onClick={handleAddTask}>{
-                        taskIsPrepairing ? "Add New Task" : "Cancel"
+                    <Button className="manager-button" variant="contained" onClick={handleChangeTaskPreparation}>{
+                        isTaskPreparing ? "Cancel" : "Add New Task"
                     }</Button>
-                    <Button variant="contained" onClick={handleDeleteAllTasks}>Clear completed tasks</Button>
+                    <Button className="manager-button" variant="contained" onClick={handleDeleteAllTasks}>Clear completed tasks</Button>
                 </div>
             </div>
         </div >
