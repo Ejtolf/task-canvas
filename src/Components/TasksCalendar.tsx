@@ -1,24 +1,13 @@
 import React, { useContext } from 'react';
 import { useState } from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridCellParams, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button, Alert, FormControl, FormControlLabel, Checkbox } from '@mui/material';
 import IsTaskPreparingContext from '../Context/contexts';
 import CustomizedSnackbars from './Snackbars/Sliders';
 
 import "../Styles/TasksCalendar.css";
 import { TaskContext } from '../Context/tasksContext';
-
-const columns: GridColDef[] = [
-    { field: 'id', headerName: '№', width: 70 },
-    { field: 'taskDescription', headerName: 'Task description', width: 130 },
-    { field: 'time', headerName: 'Time', width: 130 },
-    { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
-    { field: 'taskStatus', headerName: 'Status', width: 160 },
-];
-
-const rows = [
-    { id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" }
-];
+import { maxHeaderSize } from 'http';
 
 interface Task {
     index: number,
@@ -30,28 +19,50 @@ interface Task {
     isCompleted: boolean
 }
 
+const columns: GridColDef[] = [
+    { field: 'id', headerName: '№', width: 70 },
+    { field: 'taskDescription', headerName: 'Task description', width: 250 },
+    { field: 'time', headerName: 'Time', width: 130 },
+    { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
+    { field: 'taskStatus', headerName: 'Status', width: 130 },
+];
+
+const rows = [
+    { id: 1, taskDescription: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
+    { id: 2, taskDescription: 'My second task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
+];
+
 const TaskGridComponent: React.FC = () => {
+    const [updatedRows, setUpdatedRows] = React.useState(rows);
+
+    const handleCellClick = (params: GridCellParams) => {
+        const updatedRow = { ...params.row };
+        if (updatedRow.taskStatus === 'Not completed') {
+            updatedRow.taskStatus = 'In process..';
+        } else if (updatedRow.taskStatus === 'In process..' && params.row.id === updatedRow.id) {
+            updatedRow.taskStatus = 'Completed';
+        } else if (updatedRow.taskStatus === 'Completed') {
+            updatedRow.taskStatus = 'Not completed';
+        }
+
+        const newRows = updatedRows.map((row) => (row.id === updatedRow.id ? updatedRow : row));
+        setUpdatedRows(newRows);
+    };
+
     return (
         <div className="tasks-calendar">
-            <div style={{
-                height: '50vh',
-            }}>
+            <div style={{ height: '50vh' }}>
                 <DataGrid
-                    rows={rows}
+                    rows={updatedRows}
                     columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: { page: 0, pageSize: 5 },
-                        },
-                    }}
-                    pageSizeOptions={[5, 10]}
-                    checkboxSelection
+                    onCellClick={handleCellClick}
                 />
             </div>
-            {/* </ThemeProvider> */}
         </div>
-    )
-}
+    );
+};
+
+
 
 const TaskPreparingComponent: React.FC = () => {
     const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
