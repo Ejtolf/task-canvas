@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Slide, SlideProps, Snackbar, Typography } from "@mui/material";
-// import CustomizedSnackbars from "./Snackbars/Sliders";
 import IsTaskPreparingContext from "../Context/contexts";
+
 import "../Styles/InformationBlock.css";
 
 const InformationBlock: React.FC = () => {
     const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
-    // const [taskPreparingState, setTaskPreparingState] = useState<boolean>(false);
 
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);

@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
-import { useState } from "react";
+import React, { useState, useContext, createContext } from 'react';
 import { DataGrid, GridCellParams, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button, Alert, FormControl, FormControlLabel, Checkbox } from '@mui/material';
 import IsTaskPreparingContext from '../Context/contexts';
 import CustomizedSnackbars from './Snackbars/Sliders';
 
 import "../Styles/TasksCalendar.css";
-import { TaskContext } from '../Context/tasksContext';
-import { maxHeaderSize } from 'http';
 
 interface Task {
     index: number,
@@ -19,21 +16,49 @@ interface Task {
     isCompleted: boolean
 }
 
-const columns: GridColDef[] = [
-    { field: 'id', headerName: '№', width: 70 },
-    { field: 'taskDescription', headerName: 'Task description', width: 250 },
-    { field: 'time', headerName: 'Time', width: 130 },
-    { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
-    { field: 'taskStatus', headerName: 'Status', width: 130 },
-];
+interface TaskContextProps {
+    taskList: Task[];
+    setTaskList: React.Dispatch<React.SetStateAction<Task[]>>;
+}
 
-const rows = [
-    { id: 1, taskDescription: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
-    { id: 2, taskDescription: 'My second task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
-];
+const TaskContext = createContext<TaskContextProps>({
+    taskList: [],
+    setTaskList: () => { },
+});
+
+
+export const useTaskContext = () => {
+    return useContext(TaskContext);
+};
+
+const CombinedComponent: React.FC = () => {
+    const [taskList, setTaskList] = useState<Task[]>([]);
+
+    return (
+        <TaskContext.Provider value={{ taskList, setTaskList }}>
+            <TaskPreparingComponent />
+            <TaskGridComponent />
+        </TaskContext.Provider>
+    );
+};
+
 
 const TaskGridComponent: React.FC = () => {
+    const columns: GridColDef[] = [
+        { field: 'id', headerName: '№', width: 70 },
+        { field: 'taskDescription', headerName: 'Task description', width: 250 },
+        { field: 'time', headerName: 'Time', width: 130 },
+        { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
+        { field: 'taskStatus', headerName: 'Status', width: 130 },
+    ];
+
+    const rows = [
+        { id: 1, taskDescription: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
+        { id: 2, taskDescription: 'My second task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
+    ];
+
     const [updatedRows, setUpdatedRows] = React.useState(rows);
+    const { taskList } = useTaskContext(); //!...
 
     const handleCellClick = (params: GridCellParams) => {
         const updatedRow = { ...params.row };
@@ -66,8 +91,7 @@ const TaskGridComponent: React.FC = () => {
 
 const TaskPreparingComponent: React.FC = () => {
     const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
-    // const { taskList, setTaskList } = useContext(TaskContext);
-    // const [taskIsPrepairingNow, setTaskIsPrepairingNow] = useState([]);
+    const { taskList, setTaskList } = useTaskContext();
     const [taskTitle, setTaskTitle] = useState("");
     const [inputedText, setInputedText] = useState("");
     const [deadlineTime, setDeadlineTime] = useState("");
@@ -85,8 +109,6 @@ const TaskPreparingComponent: React.FC = () => {
     );
 
     const handleAddTaskToTableGrid = () => {
-        // rows.push({ id: 1, taskDescription: "My first task for it.", time: "01.02.2023", deadlineTime: "02.02.2023", taskStatus: "Not completed!" });
-        // setIsTaskPreparing(!taskIsPrepairingNow);
         const newTask: Task = {
             index: 2,
             title: taskTitle,
@@ -97,12 +119,7 @@ const TaskPreparingComponent: React.FC = () => {
             isCompleted: false
         };
 
-        // for (let i = 0; i < taskList.length; i++) {
-        // console.log(taskList[i]);
-        // }
-
-        // setTaskList([...taskList, newTask]);
-        // setTaskList([...taskList, newTask]);
+        setTaskList((prevTaskList) => [...prevTaskList, newTask]); //!
     }
 
     const formatText = () => {
@@ -145,10 +162,10 @@ In the task table, you will only see the title; when you open it, you will be ab
                         formatText();
                         // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"!"} />
                         //! ADD LOGIC HERE.
-                        handleAddTaskToTableGrid();
+                        alert("No fields was filled.");
                     } else {
                         // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"?"} />
-                        console.log("...");
+                        handleAddTaskToTableGrid();
                         //! ADD LOGIC HERE.
                     }
                 }}>Add to datagrid</Button>
