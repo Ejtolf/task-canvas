@@ -4,12 +4,9 @@ import "../Styles/TaskDetailed.css";
 
 const TaskDetailed: React.FC = () => {
     return (
-        <div className="taskDetailed">
-            <h1>Kanban style tasklist </h1>
-            <table>
-                What To Do
-            </table>
-        </div >
+        <div className="task-detailed">
+            <h1 className="no-tasks-were-selected-text">No tasks were selected.</h1>
+        </div>
     )
 }
 

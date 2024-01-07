@@ -13,7 +13,7 @@ interface Task {
     deadline?: string,
     isImportant: boolean,
     isUrgently: boolean,
-    isCompleted: boolean
+    isCompleted: string
 }
 
 interface TaskContextProps {
@@ -44,21 +44,22 @@ const CombinedComponent: React.FC = () => {
 
 
 const TaskGridComponent: React.FC = () => {
+    const { taskList } = useTaskContext(); //!...
+    console.log(taskList);
+
     const columns: GridColDef[] = [
         { field: 'id', headerName: '№', width: 70 },
-        { field: 'taskDescription', headerName: 'Task description', width: 250 },
+        { field: 'taskTitle', headerName: 'Task title', width: 250 },
         { field: 'time', headerName: 'Time', width: 130 },
         { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
         { field: 'taskStatus', headerName: 'Status', width: 130 },
     ];
 
     const rows = [
-        { id: 1, taskDescription: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
-        { id: 2, taskDescription: 'My second task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' },
+        { id: 1, taskTitle: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' }
     ];
 
     const [updatedRows, setUpdatedRows] = React.useState(rows);
-    const { taskList } = useTaskContext(); //!...
 
     const handleCellClick = (params: GridCellParams) => {
         const updatedRow = { ...params.row };
@@ -90,7 +91,7 @@ const TaskGridComponent: React.FC = () => {
 
 
 const TaskPreparingComponent: React.FC = () => {
-    const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
+    const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
     const { taskList, setTaskList } = useTaskContext();
     const [taskTitle, setTaskTitle] = useState("");
     const [inputedText, setInputedText] = useState("");
@@ -104,7 +105,7 @@ const TaskPreparingComponent: React.FC = () => {
             deadline: "",
             isImportant: true,
             isUrgently: true,
-            isCompleted: false
+            isCompleted: "Not completed"
         }
     );
 
@@ -116,7 +117,7 @@ const TaskPreparingComponent: React.FC = () => {
             deadline: deadlineTime,
             isImportant: true,
             isUrgently: true,
-            isCompleted: false
+            isCompleted: "Not completed"
         };
 
         setTaskList((prevTaskList) => [...prevTaskList, newTask]); //!
@@ -131,52 +132,57 @@ const TaskPreparingComponent: React.FC = () => {
         setInputedText(formattedText);
     };
 
-    return (
-        <div className="new-task-form">
-            <h1 className="new-task-title">New Task</h1>
-            <hr />
-            <div className="new-task-span-head">
-                <div className="left-section">
-                    <input className="task-title-input" value={taskTitle} type="text" placeholder="Task title" onChange={(e) => setTaskTitle(e.target.value)} />
+    if (isTaskPreparing === true) {
+        return (
+            <div className="new-task-form">
+                <h1 className="new-task-title">New Task</h1>
+                <hr />
+                <div className="new-task-span-head">
+                    <div className="left-section">
+                        <input className="task-title-input" value={taskTitle} type="text" placeholder="Task title" onChange={(e) => setTaskTitle(e.target.value)} />
+                    </div>
+                    <div className="right-section">
+                        <div className="deadline-label">deadline time:</div>
+                        <input className="deadline-input" type="date" />
+                    </div>
                 </div>
-                <div className="right-section">
-                    <div className="deadline-label">deadline time:</div>
-                    <input className="deadline-input" type="date" />
-                </div>
-            </div>
-            <hr />
-            <div>
-                <textarea value={inputedText} className="task-description-input" placeholder="Task description and detailed information.
+                <hr />
+                <div>
+                    <textarea value={inputedText} className="task-description-input" placeholder="Task description and detailed information.
 In the task table, you will only see the title; when you open it, you will be able to see this description, so:
 - Enter the necessary details here, follow the text format;
 - If necessary, format the text, making it *bold*, _italic_, ~underlined~, or !highlighted!." onChange={(e) => setInputedText(e.target.value)} />
+                </div>
+                <div className="new-task-notes">
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Important" />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" />
+                </div>
+                {/* <br /> */}
+                <span className="new-task-buttons-span">
+                    <Button variant="contained" onClick={() => {
+                        if (taskTitle.trim() === "" && inputedText.trim() === "") {
+                            formatText();
+                            // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"!"} />
+                            //! ADD LOGIC HERE.
+                            alert("No fields was filled.");
+                        } else {
+                            // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"?"} />
+                            //! ADD LOGIC HERE.
+                            handleAddTaskToTableGrid();
+                            setIsTaskPreparing(false);
+                        }
+                    }}>Add to datagrid</Button>
+                    <Button variant="contained" onClick={() => {
+                        setTaskTitle(" ");
+                        setInputedText(" ");
+                        setDeadlineTime(" ");
+                    }}>Clear</Button>
+                </span>
             </div>
-            <div className="new-task-notes">
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Important" />
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" />
-            </div>
-            {/* <br /> */}
-            <span className="new-task-buttons-span">
-                <Button variant="contained" onClick={() => {
-                    if (taskTitle.trim() === " " && inputedText.trim() === " ") {
-                        formatText();
-                        // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"!"} />
-                        //! ADD LOGIC HERE.
-                        alert("No fields was filled.");
-                    } else {
-                        // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"?"} />
-                        handleAddTaskToTableGrid();
-                        //! ADD LOGIC HERE.
-                    }
-                }}>Add to datagrid</Button>
-                <Button variant="contained" onClick={() => {
-                    setTaskTitle(" ");
-                    setInputedText(" ");
-                    setDeadlineTime(" ");
-                }}>Clear</Button>
-            </span>
-        </div>
-    )
+        )
+    } else {
+        return <TaskGridComponent />
+    }
 }
 
 const TasksCalendar: React.FC = () => {

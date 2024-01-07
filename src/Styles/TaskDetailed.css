@@ -1,7 +1,9 @@
 .taskDetailed {
-  background-color: white;
+  background-color: #000033;
+  border-style: double;
+  border-color: purple;
 }
 
-.table {
-  margin-left: 0%;
+.no-tasks-were-selected-text {
+  color: blue;
 }
