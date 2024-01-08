@@ -1,9 +1,9 @@
 .task-graphs {
   background-color: white;
-  border-style: solid;
-  border-color: purple;
   width: 50%;
   overflow: y;
+  background-color: #000033;
+  color: white;
 }
 
 .kanban-board {
@@ -12,6 +12,9 @@
   overflow-y: scroll;
   max-height: 40vh;
   width: 50vh;
+  border-style: solid;
+  border-color: purple;
+  background-color: #000033;
 }
 
 .graphs-header-buttons {
@@ -23,7 +26,7 @@
 .column {
   flex: 1;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #00000d;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -34,7 +37,7 @@
 }
 
 .task {
-  background-color: #fff;
+  background-color: #00000d;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -42,8 +45,34 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.kanban-header-h2 {
+.todo div:hover {
+  text-shadow: 0 0 10px red;
+}
+
+.in-process div:hover {
+  text-shadow: 0 0 10px orange;
+}
+
+.done div:hover {
+  text-shadow: 0 0 10px green;
+}
+
+.kanban-header-h2-todo {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-shadow: 0 0 10px red;
+}
+
+.kanban-header-h2-in-process {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-shadow: 0 0 10px orange;
+}
+
+.kanban-header-h2-done {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-shadow: 0 0 10px green;
 }
 
 .kanban-board {

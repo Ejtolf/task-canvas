@@ -7,19 +7,19 @@ const KanbanGridComponent: React.FC = () => {
     return (
         <div className="task-graphs">
             <div className="kanban-board">
-                <div className="column">
-                    <h3 className="kanban-header-h2">To Do</h3>
+                <div className="column todo">
+                    <h3 className="kanban-header-h2-todo">To Do</h3>
                     <div className="task">Task 1</div>
                     <div className="task">Task 2</div>
                     <div className="task">Task 3</div>
                 </div>
-                <div className="column">
-                    <h3 className="kanban-header-h2">In Process</h3>
+                <div className="column in-process">
+                    <h3 className="kanban-header-h2-in-process">In Process</h3>
                     <div className="task">Task 4</div>
                     <div className="task">Task 5</div>
                 </div>
-                <div className="column">
-                    <h3 className="kanban-header-h2">Done</h3>
+                <div className="column done">
+                    <h3 className="kanban-header-h2-done">Done</h3>
                     <div className="task">Task 6</div>
                 </div>
             </div>
@@ -47,9 +47,9 @@ const TaskGraphs: React.FC = () => {
     return (
         <div>
             <div className="graphs-header-buttons">
-                <button onClick={() => handleChangeMode(1)}>Matrix...</button>
-                <button onClick={() => handleChangeMode(2)}>KANBAN</button>
-                <button onClick={() => handleChangeMode(3)}>Anything...</button>
+                <button className="MatrixMode" onClick={() => handleChangeMode(1)}>Matrix...</button>
+                <button className="KANBANMODE" onClick={() => handleChangeMode(2)}>KANBAN</button>
+                <button className="AnythingSection" onClick={() => handleChangeMode(3)}>Anything...</button>
             </div>
             <div>{(() => {
                 switch (mode) {
