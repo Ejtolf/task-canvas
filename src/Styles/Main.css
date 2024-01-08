@@ -22,11 +22,19 @@
   flex-direction: column;
 }
 
-.higher {
+.higher,
+.lower {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.higher {
   animation: 0.5s hasBeenAppeared ease-in-out forwards;
+}
+
+.lower {
+  animation: 1.5s hasBeenAppeared ease-in-out forwards;
 }
 
 .info-span,
@@ -34,9 +42,7 @@
   flex: 1;
 }
 
-.lower {
-  display: flex;
-  justify-content: space-between;
+.task-graphs,
+.task-detailed {
   flex: 1;
-  animation: 1.5s hasBeenAppeared ease-in-out forwards;
 }

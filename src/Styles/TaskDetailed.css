@@ -1,7 +1,6 @@
 .taskDetailed {
   background-color: #000033;
-  border-style: double;
-  border-color: purple;
+  width: 100%;
 }
 
 .no-tasks-were-selected-text {

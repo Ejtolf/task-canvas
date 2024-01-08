@@ -2,6 +2,7 @@ import React from "react";
 
 import "../Styles/TaskGraphs.css";
 
+//TODO: "Таблица Канбан".
 const KanbanGridComponent: React.FC = () => {
     return (
         <div className="task-graphs">
@@ -22,15 +23,16 @@ const KanbanGridComponent: React.FC = () => {
                     <div className="task">Task 6</div>
                 </div>
             </div>
-
         </div >
     );
 }
 
+//TODO: Матрица Эйзенхауэра.
 const MatrixFirst: React.FC = () => {
     return <h1>Матрица Эйзенхауэра</h1>
 }
 
+//TODO: Ещё не придумано.
 const AnotherOneMatrix: React.FC = () => {
     return <h1>Чёто ещё</h1>
 }
@@ -44,7 +46,7 @@ const TaskGraphs: React.FC = () => {
 
     return (
         <div>
-            <div style={{ display: "flex" }}>
+            <div className="graphs-header-buttons">
                 <button onClick={() => handleChangeMode(1)}>Matrix...</button>
                 <button onClick={() => handleChangeMode(2)}>KANBAN</button>
                 <button onClick={() => handleChangeMode(3)}>Anything...</button>

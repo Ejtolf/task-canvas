@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import { DataGrid, GridCellParams, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button, Alert, FormControl, FormControlLabel, Checkbox } from '@mui/material';
 import IsTaskPreparingContext from '../Context/contexts';
@@ -55,9 +55,20 @@ const TaskGridComponent: React.FC = () => {
         { field: 'taskStatus', headerName: 'Status', width: 130 },
     ];
 
-    const rows = [
-        { id: 1, taskTitle: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' }
-    ];
+    const rows = (taskList.length === 0) ? [] :
+        // React.useEffect(() => {
+        [
+            taskList.map((task) => {
+                return {
+                    id: task.index,
+                    taskTitle: task.title,
+                    time: task.deadline,
+                    deadlineTime: task.deadline,
+                    taskStatus: task.isCompleted ? 'Completed' : 'Not completed',
+                };
+            })
+        ]
+    // }, [taskList]);
 
     const [updatedRows, setUpdatedRows] = React.useState(rows);
 
@@ -71,8 +82,8 @@ const TaskGridComponent: React.FC = () => {
             updatedRow.taskStatus = 'Not completed';
         }
 
-        const newRows = updatedRows.map((row) => (row.id === updatedRow.id ? updatedRow : row));
-        setUpdatedRows(newRows);
+        // const newRows = updatedRows.map((row) => (row.index === updatedRow.id ? updatedRow : row));
+        // setUpdatedRows(newRows);
     };
 
     return (
@@ -120,7 +131,8 @@ const TaskPreparingComponent: React.FC = () => {
             isCompleted: "Not completed"
         };
 
-        setTaskList((prevTaskList) => [...prevTaskList, newTask]); //!
+        setTaskList((taskList) => [...taskList, newTask]); //!
+        setIsTaskPreparing(false);
     }
 
     const formatText = () => {
@@ -169,7 +181,6 @@ In the task table, you will only see the title; when you open it, you will be ab
                             // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"?"} />
                             //! ADD LOGIC HERE.
                             handleAddTaskToTableGrid();
-                            setIsTaskPreparing(false);
                         }
                     }}>Add to datagrid</Button>
                     <Button variant="contained" onClick={() => {

@@ -2,6 +2,7 @@
   background-color: white;
   border-style: solid;
   border-color: purple;
+  width: 50%;
   overflow: y;
 }
 
@@ -11,6 +12,12 @@
   overflow-y: scroll;
   max-height: 40vh;
   width: 50vh;
+}
+
+.graphs-header-buttons {
+  display: flex;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .column {
@@ -32,4 +39,13 @@
   margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.kanban-header-h2 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.kanban-board {
+  width: 200%;
 }
