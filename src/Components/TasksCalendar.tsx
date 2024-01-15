@@ -7,80 +7,43 @@ import CustomizedSnackbars from './Snackbars/Sliders';
 import "../Styles/TasksCalendar.css";
 
 interface Task {
-    index: number,
-    title: string,
-    description?: string,
-    deadline?: string,
-    isImportant: boolean,
-    isUrgently: boolean,
-    isCompleted: string
+    index: number;
+    title: string;
+    description?: string;
+    deadline?: string;
+    isImportant: boolean;
+    isUrgently: boolean;
+    isCompleted: string;
 }
 
-interface TaskContextProps {
-    taskList: Task[];
-    setTaskList: React.Dispatch<React.SetStateAction<Task[]>>;
+interface TaskList {
+    tasks?: Task[];
 }
 
-const TaskContext = createContext<TaskContextProps>({
-    taskList: [],
-    setTaskList: () => { },
-});
-
-
-export const useTaskContext = () => {
-    return useContext(TaskContext);
-};
-
-const CombinedComponent: React.FC = () => {
-    const [taskList, setTaskList] = useState<Task[]>([]);
-
-    return (
-        <TaskContext.Provider value={{ taskList, setTaskList }}>
-            <TaskPreparingComponent />
-            <TaskGridComponent />
-        </TaskContext.Provider>
-    );
-};
-
-const TaskGridComponent: React.FC = () => {
-    const { taskList } = useTaskContext(); //!...
-    console.log(taskList);
-
+const TaskGridComponent: React.FC<TaskList> = ({ tasks }) => {
     const columns: GridColDef[] = [
-        { field: 'id', headerName: '№', width: 70 },
-        { field: 'taskTitle', headerName: 'Task title', width: 250 },
-        { field: 'time', headerName: 'Time', width: 130 },
-        { field: 'deadlineTime', headerName: 'Deadline', type: 'number', width: 130 },
-        { field: 'taskStatus', headerName: 'Status', width: 130 },
+        { field: 'index', headerName: '№', width: 70 },
+        { field: 'title', headerName: 'Task title', width: 250 },
+        { field: 'description', headerName: 'Description', width: 130 },
+        { field: 'deadline', headerName: 'Deadline', width: 130 },
+        { field: 'isCompleted', headerName: 'Status', width: 130 },
     ];
 
-    const rows = [
-        { id: 1, taskTitle: 'My first task for it.', time: '01.02.2023', deadlineTime: '02.02.2023', taskStatus: 'Not completed' }
-    ];
-
-    const [updatedRows, setUpdatedRows] = React.useState(rows);
-
-    const handleCellClick = (params: GridCellParams) => {
-        const updatedRow = { ...params.row };
-        if (updatedRow.taskStatus === 'Not completed') {
-            updatedRow.taskStatus = 'In process..';
-        } else if (updatedRow.taskStatus === 'In process..' && params.row.id === updatedRow.id) {
-            updatedRow.taskStatus = 'Completed';
-        } else if (updatedRow.taskStatus === 'Completed') {
-            updatedRow.taskStatus = 'Not completed';
-        }
-
-        const newRows = updatedRows.map((row) => (row.id === updatedRow.id ? updatedRow : row));
-        setUpdatedRows(newRows);
-    };
+    const rows = (tasks || []).map((task: Task, index) => ({
+        id: index + 1,
+        index: task.index,
+        title: task.title,
+        description: task.description,
+        deadline: task.deadline,
+        isCompleted: task.isCompleted,
+    }));
 
     return (
         <div className="tasks-calendar">
             <div style={{ height: '50vh' }}>
                 <DataGrid
-                    rows={updatedRows}
                     columns={columns}
-                    onCellClick={handleCellClick}
+                    rows={rows}
                 />
             </div>
         </div>
@@ -91,22 +54,10 @@ const TaskGridComponent: React.FC = () => {
 
 const TaskPreparingComponent: React.FC = () => {
     const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
-    const { taskList, setTaskList } = useTaskContext();
+    const [taskList, setTaskList] = useState<Task[]>();
     const [taskTitle, setTaskTitle] = useState("");
     const [inputedText, setInputedText] = useState("");
     const [deadlineTime, setDeadlineTime] = useState("");
-    const [openAlert, setOpenAlert] = useState(false);
-    const [task, setTask] = useState<Task>(
-        {
-            index: 0,
-            title: "",
-            description: "",
-            deadline: "",
-            isImportant: true,
-            isUrgently: true,
-            isCompleted: "Not completed"
-        }
-    );
 
     const handleAddTaskToTableGrid = () => {
         const newTask: Task = {
@@ -119,8 +70,12 @@ const TaskPreparingComponent: React.FC = () => {
             isCompleted: "Not completed"
         };
 
-        setTaskList((prevTaskList) => [...prevTaskList, newTask]); //!
+        setTaskList((prevTaskList) => prevTaskList ? [...prevTaskList, newTask] : [newTask]);
+        setIsTaskPreparing(false);
+
+        return <TaskGridComponent tasks={taskList} />
     }
+
 
     const formatText = () => {
         let formattedText = inputedText;
@@ -168,7 +123,7 @@ In the task table, you will only see the title; when you open it, you will be ab
                             // <CustomizedSnackbars handleClick={() => setOpenAlert(!openAlert)} alertOpen={openAlert} message={"?"} />
                             //! ADD LOGIC HERE.
                             handleAddTaskToTableGrid();
-                            setIsTaskPreparing(false);
+                            // setIsTaskPreparing(false);
                         }
                     }}>Add to datagrid</Button>
                     <Button variant="contained" onClick={() => {
@@ -186,7 +141,6 @@ In the task table, you will only see the title; when you open it, you will be ab
 
 const TasksCalendar: React.FC = () => {
     const { isTaskPreparing } = useContext(IsTaskPreparingContext);
-    const [taskList, setTaskList] = useState<Task[]>([]);;
 
     return (
         <>
@@ -196,4 +150,3 @@ const TasksCalendar: React.FC = () => {
 }
 
 export default TasksCalendar;
-

@@ -34,7 +34,7 @@ const MatrixFirst: React.FC = () => {
 
 //TODO: Ещё не придумано.
 const AnotherOneMatrix: React.FC = () => {
-    return <h1>Чёто ещё</h1>
+    return <h1>???</h1>
 }
 
 const TaskGraphs: React.FC = () => {
@@ -49,7 +49,7 @@ const TaskGraphs: React.FC = () => {
             <div className="graphs-header-buttons">
                 <button className="MatrixMode" onClick={() => handleChangeMode(1)}>Matrix...</button>
                 <button className="KANBANMODE" onClick={() => handleChangeMode(2)}>KANBAN</button>
-                <button className="AnythingSection" onClick={() => handleChangeMode(3)}>Anything...</button>
+                <button className="AnythingSection" onClick={() => handleChangeMode(3)}>Other...</button>
             </div>
             <div>{(() => {
                 switch (mode) {

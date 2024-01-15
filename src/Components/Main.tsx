@@ -22,10 +22,10 @@ export default function Main() {
                 </div>
                 <div className="lower">
                     <div className="task-graphs">
-                        <TaskGraphs />
+                        {/* <TaskGraphs /> */}
                     </div>
                     <div className="task-detailed">
-                        <TaskDetailed />
+                        {/* <TaskDetailed /> */}
                     </div>
                 </div>
             </div>
