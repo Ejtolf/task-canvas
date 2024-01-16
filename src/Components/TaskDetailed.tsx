@@ -11,9 +11,7 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ rowData }) => {
             {
                 (rowData) ?
                     <>
-                        <h2>Selected Task Details</h2>
-                        <p>ID: {rowData.id}</p>
-                        <p>Task Title: {rowData.taskTitle}</p>
+                        <h1 className="no-tasks-were-selected-text">Task selected: {rowData.index}</h1>
                     </> :
                     <>
                         <h1 className="no-tasks-were-selected-text">No tasks were selected.</h1>
