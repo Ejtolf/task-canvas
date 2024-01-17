@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import IsTaskPreparingContext from '../Context/contexts';
 import TaskPreparingComponent from './TasksCalendarChildren/TaskPreparingComponent';
 import TaskGridComponent from './TasksCalendarChildren/TaskGridComponent';
 
 interface Task {
-    index?: number;
+    id: number;
     title: string;
     description?: string;
     generationTime?: Date;
@@ -21,9 +21,14 @@ interface TasksCalendarProps {
 const TasksCalendar: React.FC<TasksCalendarProps> = (props) => {
     const { isTaskPreparing } = useContext(IsTaskPreparingContext);
 
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const handleTaskAdd = (newTask: Task) => {
+        setTasks(old => ([...old, newTask]))
+    }
+
     return (
         <>
-            {isTaskPreparing ? <TaskPreparingComponent /> : <TaskGridComponent tasks={props.taskList || []} />}
+            {isTaskPreparing ? <TaskPreparingComponent onTaskAdd={handleTaskAdd} /> : <TaskGridComponent tasks={tasks} />}
         </>
     );
 }

@@ -6,3 +6,32 @@
 .no-tasks-were-selected-text {
   color: blue;
 }
+
+.td-header {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.td-task-title {
+  color: white;
+  text-shadow: 0 0 10px blue;
+}
+
+.is-completed {
+  color: white;
+}
+
+.is-completed-not {
+  text-shadow: 0 0 10px red;
+}
+
+.is-completed-in-work {
+  text-shadow: 0 0 10px yellow;
+}
+
+.is-completed-done {
+  text-shadow: 0 0 10px lime;
+}

@@ -4,7 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import "../../Styles/TasksCalendar.css";
 
 interface Task {
-    index?: number;
+    id: number;
     title: string;
     description?: string;
     generationTime?: Date;
@@ -28,8 +28,7 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks }) => {
     ];
 
     const rows = (tasks || []).map((task: Task) => ({
-        id: task.index,
-        index: task.index,
+        id: task.id,
         title: task.title,
         description: task.description,
         deadline: task.deadline,
