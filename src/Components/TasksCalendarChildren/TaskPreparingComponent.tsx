@@ -84,6 +84,8 @@ In the task table, you will only see the title; when you open it, you will be ab
                 <Button variant="contained" onClick={() => {
                     if (taskTitle.trim() === "" && description.trim() === "") {
                         alert("No fields was filled.");
+                    } else if (taskTitle.trim() === "") {
+                        alert("Task title must be filled.");
                     } else {
                         handleAddTaskToTableGrid();
                     }

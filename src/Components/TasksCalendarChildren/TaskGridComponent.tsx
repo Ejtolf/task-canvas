@@ -20,7 +20,7 @@ interface TaskListProps {
 
 const TaskGridComponent: React.FC<TaskListProps> = ({ tasks }) => {
     const columns: GridColDef[] = [
-        { field: 'index', headerName: '№', width: 70 },
+        { field: 'id', headerName: '№', width: 70 },
         { field: 'title', headerName: 'Task title', width: 250 },
         { field: 'description', headerName: 'Description', width: 130 },
         { field: 'deadline', headerName: 'Deadline', width: 130 },
@@ -30,8 +30,8 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks }) => {
     const rows = (tasks || []).map((task: Task) => ({
         id: task.id,
         title: task.title,
-        description: task.description,
-        deadline: task.deadline,
+        description: task.description || "-",
+        deadline: task.deadline || "-",
         isCompleted: task.isCompleted,
     }));
 
@@ -39,8 +39,8 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks }) => {
         <div className="tasks-calendar">
             <div style={{ height: '50vh' }}>
                 <DataGrid
-                    columns={columns}
                     rows={rows}
+                    columns={columns}
                 />
             </div>
         </div>
