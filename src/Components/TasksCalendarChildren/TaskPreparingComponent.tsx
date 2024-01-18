@@ -24,10 +24,11 @@ interface TaskPreparingComponentProps {
 
 let id = 0;
 const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskAdd }) => {
-    const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
+    const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
+    const currentDate = new Date().toISOString().split('T')[0];
     const [taskTitle, setTaskTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [deadlineTime, setDeadlineTime] = useState("");
+    const [deadlineTime, setDeadlineTime] = useState<string>(currentDate);
     const [isImportant, setIsImportant] = useState<boolean>(true);
     const [isUrgently, setIsUrgently] = useState<boolean>(true);
 
@@ -66,7 +67,10 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
                 </div>
                 <div className="right-section">
                     <div className="deadline-label">deadline time:</div>
-                    <input className="deadline-input" type="date" />
+                    <input className="deadline-input" value="date" type="date" onChange={(e) => {
+                        const newDate = e.target.value;
+                        setDeadlineTime(newDate);
+                    }} defaultValue={currentDate} />
                 </div>
             </div>
             <hr />

@@ -8,7 +8,7 @@ interface Task {
     title: string;
     description?: string;
     generationTime?: Date;
-    deadline?: string;
+    deadline?: string | Date;
     isImportant: boolean;
     isUrgently: boolean;
     isCompleted: string;
