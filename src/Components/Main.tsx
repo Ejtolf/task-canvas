@@ -20,14 +20,6 @@ export default function Main() {
                         <TasksCalendar />
                     </span>
                 </div>
-                <div className="lower">
-                    <div className="task-graphs">
-                        {/* <TaskGraphs /> */}
-                    </div>
-                    <div className="task-detailed">
-                        {/* <TaskDetailed /> */}
-                    </div>
-                </div>
             </div>
         </div>
     )
