@@ -53,6 +53,7 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => 
                 <DataGrid
                     rows={rows}
                     columns={columns}
+                    // @ts-ignore
                     onRowClick={handleRowClick}
                 />
             </div>
