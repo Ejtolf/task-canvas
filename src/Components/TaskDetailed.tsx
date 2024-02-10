@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
+
 import "../Styles/TaskDetailed.css";
 
 interface Task {
-    index?: number;
+    id: number;
     title: string;
     description?: string;
     generationTime?: Date;
@@ -13,54 +14,25 @@ interface Task {
 }
 
 interface TaskDetailedProps {
-    Task?: Task
+    task: Task | undefined;
 }
 
-const TaskDetailed: React.FC<TaskDetailedProps> = (taskProp) => {
-    const sampleTask: Task = {
-        index: 1,
-        title: "Sample task title.",
-        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde possimus officia tenetur sunt quo eum? Ut, quo atque cupiditate illo error vitae blanditiis inventore distinctio nam similique exercitationem recusandae alias.",
-        generationTime: new Date(),
-        deadline: "01.02.2024",
-        isImportant: true,
-        isUrgently: false,
-        isCompleted: "Not Completed"
+const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
+    if (!task) {
+        return <div className="no-tasks-were-selected-text">No task selected</div>;
     }
 
     return (
         <div className="taskDetailed">
-            {
-                !taskProp ?
-                    <>
-                        <h1 className="no-tasks-were-selected-text">No task was selected.</h1>
-                    </> :
-                    <>
-                        <div className="td-header">
-                            <h1 className="td-task-title">{sampleTask.index}: {sampleTask.title}</h1>
-                            <h1 className={
-                                (() => {
-                                    switch (sampleTask.isCompleted) {
-                                        case "Not Completed":
-                                            return "is-completed is-completed-not";
-                                        case "In Work":
-                                            return "is-completed is-completed-in-work";
-                                        default:
-                                            return "is-completed is-completed-done";
-                                    }
-                                })()
-                            }>{sampleTask.isCompleted}</h1>
-                        </div>
-                        <hr />
-                        <h3>{sampleTask.description}</h3>
-                        <p>Created at {String(sampleTask.generationTime)}</p>
-                        <p>Deadline: {sampleTask.deadline}</p>
-                        <h3>{sampleTask.isImportant ? "IMPORTANT" : ""}</h3>
-                        <h3>{sampleTask.isUrgently ? "URGENTLY" : ""}</h3>
-                    </>
-            }
+            <h2>{task.title}</h2>
+            <p>Description: {task.description || 'No description available'}</p>
+            <p>Generation Time: {task.generationTime?.toLocaleString() || 'Not specified'}</p>
+            <p>Deadline: {task.deadline || 'Not specified'}</p>
+            <p>Is Important: {task.isImportant ? 'Yes' : 'No'}</p>
+            <p>Is Urgently: {task.isUrgently ? 'Yes' : 'No'}</p>
+            <p>Is Completed: {task.isCompleted}</p>
         </div>
     );
-}
+};
 
 export default TaskDetailed;

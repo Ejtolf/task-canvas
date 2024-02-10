@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Button, FormControlLabel, Checkbox } from '@mui/material';
-
 import IsTaskPreparingContext from '../../Context/contexts';
 import TaskGridComponent from './TaskGridComponent';
+import TasksCalendar from '../TasksCalendar';
 
 import "../../Styles/TasksCalendar.css";
-import TasksCalendar from '../TasksCalendar';
 
 interface Task {
     id: number;
@@ -19,16 +18,15 @@ interface Task {
 }
 
 interface TaskPreparingComponentProps {
-    onTaskAdd: (newTask: Task) => void
+    onTaskAdd: (newTask: Task) => void;
 }
 
 let id = 0;
 const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskAdd }) => {
     const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
-    const currentDate = new Date().toISOString().split('T')[0];
     const [taskTitle, setTaskTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [deadlineTime, setDeadlineTime] = useState<string>(currentDate);
+    const [deadlineTime, setDeadlineTime] = useState<string>("");
     const [isImportant, setIsImportant] = useState<boolean>(true);
     const [isUrgently, setIsUrgently] = useState<boolean>(true);
 
@@ -70,7 +68,7 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
                     <input className="deadline-input" value="date" type="date" onChange={(e) => {
                         const newDate = e.target.value;
                         setDeadlineTime(newDate);
-                    }} defaultValue={currentDate} />
+                    }} />
                 </div>
             </div>
             <hr />

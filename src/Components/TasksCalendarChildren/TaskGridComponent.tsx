@@ -1,5 +1,6 @@
-import React from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import React, { SetStateAction, useState } from 'react';
+import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
+import TaskDetailed from '../TaskDetailed';
 
 import "../../Styles/TasksCalendar.css";
 
@@ -8,7 +9,7 @@ interface Task {
     title: string;
     description?: string;
     generationTime?: Date;
-    deadline?: string | Date;
+    deadline?: string;
     isImportant: boolean;
     isUrgently: boolean;
     isCompleted: string;
@@ -16,9 +17,12 @@ interface Task {
 
 interface TaskListProps {
     tasks?: Task[];
+    onTaskChoice: (chosenTaskId: Task) => void;
 }
 
-const TaskGridComponent: React.FC<TaskListProps> = ({ tasks }) => {
+const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => {
+    const [selectedId, setSelectedId] = useState<number>(0);
+
     const columns: GridColDef[] = [
         { field: 'id', headerName: '№', width: 70 },
         { field: 'title', headerName: 'Task title', width: 250 },
@@ -35,12 +39,21 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks }) => {
         isCompleted: task.isCompleted,
     }));
 
+    const handleRowClick = (params: { id: GridRowId, data: Task }) => {
+        const newSelectedId = typeof params.id === 'number' ? params.id : Number(params.id);
+        const chosenTask = tasks?.find((task) => task.id === newSelectedId);
+        if (chosenTask) {
+            onTaskChoice(chosenTask);
+        }
+    };
+
     return (
         <div className="tasks-calendar">
             <div style={{ height: '50vh' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
+                    onRowClick={handleRowClick}
                 />
             </div>
         </div>

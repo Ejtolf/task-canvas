@@ -6,6 +6,7 @@
   height: 50vh;
   overflow-y: scroll;
   width: 100%;
+  position: relative;
 }
 
 @font-face {
@@ -58,9 +59,9 @@
 
 .manager-buttons {
   float: right;
-  /* margin-bottom: 5px; */
   overflow: visible;
-  flex-wrap: wrap;
+  bottom: 0;
+  position: sticky;
 }
 
 .manager-buttons .MuiButtonBase-root {

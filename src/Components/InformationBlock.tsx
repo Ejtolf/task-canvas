@@ -7,6 +7,7 @@ import "../Styles/InformationBlock.css";
 const InformationBlock: React.FC = () => {
     const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
 
+    const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
     const [lastTaskTime, setLastTaskTime] = useState<string | number | Date>(0);
@@ -43,8 +44,8 @@ const InformationBlock: React.FC = () => {
     return (
         <div className="informationBlock">
             <div className="left-column">
+                <p className="information-panel-text">Tasks: {numberOfTasks}</p>
                 <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
-                <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
                 <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
                 <p className="information-panel-text">{
                     (numberOfTasksForToday === 0) ?

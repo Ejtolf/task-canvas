@@ -3,7 +3,7 @@ import Header from "./Header";
 import InformationBlock from "./InformationBlock";
 import TasksCalendar from "./TasksCalendar";
 import TaskGraphs from "./TaskGraphs";
-import TaskDetailed from "./TaskDetailed";
+// import TaskDetailed from "./TaskDetailed";
 
 import "../Styles/Main.css"
 
