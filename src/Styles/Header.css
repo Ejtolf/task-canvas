@@ -21,7 +21,7 @@
   border-radius: 10px;
   height: 70px;
   color: white;
-  /* opacity: 90%; */
+  width: 100%;
   text-shadow: 0 0 10px rgb(0, 0, 255);
 }
 

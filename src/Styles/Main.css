@@ -1,42 +1,28 @@
 @keyframes hasBeenAppeared {
   from {
-    opacity: 0%;
+    opacity: 0;
     transform: translateY(-120px);
   }
   to {
-    opacity: 100%;
+    opacity: 1;
     transform: translateY(0);
   }
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  animation: 0.25s hasBeenAppeared ease-in-out forwards;
-}
-
-.content-inside {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.higher,
-.lower {
+.content-inside .higher {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  align-items: center;
+  animation: hasBeenAppeared 0.3s ease-in forwards;
 }
 
-.higher {
-  animation: 0.5s hasBeenAppeared ease-in-out forwards;
+.info-span {
+  flex: 0 0 40%;
+  height: 50vh;
 }
 
-.lower {
-  animation: 1.5s hasBeenAppeared ease-in-out forwards;
-}
-
-.info-span,
 .tasks-span {
-  flex: 1;
+  flex: 0 0 60%;
+  height: 50vh;
 }

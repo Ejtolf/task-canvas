@@ -26,7 +26,24 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
 
     return (
         <div className="taskDetailed">
-
+            <div className="td-header">
+                <div className="td-header-title">
+                    <h1 className="td-title">{task.title}</h1>
+                </div>
+                <div className="td-date-info">
+                    <p>Created:</p>
+                    <p>{String(task.generationTime?.getHours())}:{String(task.generationTime?.getMinutes())}, {String(task.generationTime?.getDate())}.{String(task.generationTime?.getMonth())}</p>
+                    <p>Deadline: {task.deadline || "-"}</p>
+                </div>
+            </div>
+            <div className="td-left-info">
+                <p className={checkTaskParameters(task.isImportant)}>Important</p>
+                <p className={checkTaskParameters(task.isUrgently)}>Urgently</p>
+                <p>{task.isCompleted}</p>
+            </div>
+            <div className="td-right-info">
+                <p>{task.description || "No description available."}</p>
+            </div>
         </div>
     );
 };

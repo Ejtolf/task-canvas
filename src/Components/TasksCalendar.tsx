@@ -22,7 +22,7 @@ interface TasksCalendarProps {
     taskList?: Task[];
 }
 
-const TasksCalendar: React.FC<TasksCalendarProps> = (props) => {
+const TasksCalendar: React.FC<TasksCalendarProps> = () => {
     const { isTaskPreparing } = useContext(IsTaskPreparingContext);
 
     const [tasks, setTasks] = useState<Task[]>([]);

@@ -3,7 +3,6 @@ import Header from "./Header";
 import InformationBlock from "./InformationBlock";
 import TasksCalendar from "./TasksCalendar";
 import TaskGraphs from "./TaskGraphs";
-// import TaskDetailed from "./TaskDetailed";
 
 import "../Styles/Main.css"
 
@@ -16,9 +15,12 @@ export default function Main() {
                     <span className="info-span">
                         <InformationBlock />
                     </span>
-                    <span className="tasks-span" >
+                    <span className="tasks-span">
                         <TasksCalendar />
                     </span>
+                </div>
+                <div className="lower">
+                    {/* <TaskGraphs /> */}
                 </div>
             </div>
         </div>

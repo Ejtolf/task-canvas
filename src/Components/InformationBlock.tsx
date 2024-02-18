@@ -56,22 +56,20 @@ const InformationBlock: React.FC = () => {
             <div className="right-column">
                 <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
                 <p className="information-panel-text">Date: The {currentDay} of {currentMonth}</p>
-            </div>
-            <div className="bottom">
-                <div className="last-task-div">
-                    <p className="information-panel-text p-tasks-count">{
-                        (lastTaskTime === 0) ?
-                            "No Tasks Today." :
-                            `Last task added at ${lastTaskTime}`
-                    }</p>
-                </div>
-                {/* ---------------------------------------------------------------- */}
+                <p className="information-panel-text p-tasks-count">{
+                    (lastTaskTime === 0) ?
+                        "No Tasks Today." :
+                        `Last task added at ${lastTaskTime}`
+                }</p>
                 <div className="manager-buttons">
                     <Button className="manager-button" variant="contained" onClick={handleChangeTaskPreparation}>{
                         isTaskPreparing ? "Cancel" : "Add New Task"
                     }</Button>
                     <Button className="manager-button" variant="contained" onClick={handleDeleteAllTasks}>Clear completed tasks</Button>
                 </div>
+            </div>
+            <div className="bottom">
+
             </div>
         </div >
     );

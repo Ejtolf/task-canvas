@@ -1,12 +1,8 @@
 .informationBlock {
   border-style: double;
   border-color: purple;
-  border-radius: 5%;
   color: white;
-  height: 50vh;
   overflow-y: scroll;
-  width: 100%;
-  position: relative;
 }
 
 @font-face {
@@ -34,18 +30,12 @@
   float: left;
 }
 
-.bottom {
-  /* display: flex; */
-  clear: both;
-  margin-bottom: 5px;
-}
-
 @keyframes textShadowAnimation {
   0% {
     text-shadow: 0 0 10px yellow;
   }
   50% {
-    text-shadow: 0 0 10px red; /* Change orange to red for consistency with previous examples */
+    text-shadow: 0 0 10px red;
   }
   100% {
     text-shadow: 0 0 10px yellow;
@@ -57,14 +47,14 @@
   animation: textShadowAnimation 1s linear infinite;
 }
 
-.manager-buttons {
+.informationBlock {
   float: right;
-  overflow: visible;
-  bottom: 0;
   position: sticky;
+  bottom: 0;
+  padding: 10px;
 }
 
 .manager-buttons .MuiButtonBase-root {
-  flex: 1;
+  display: block;
   margin-bottom: 5px;
 }

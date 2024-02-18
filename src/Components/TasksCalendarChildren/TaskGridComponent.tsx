@@ -21,8 +21,6 @@ interface TaskListProps {
 }
 
 const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => {
-    const [selectedId, setSelectedId] = useState<number>(0);
-
     const columns: GridColDef[] = [
         { field: 'id', headerName: '№', width: 70 },
         { field: 'title', headerName: 'Task title', width: 250 },

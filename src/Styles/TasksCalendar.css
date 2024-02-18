@@ -1,11 +1,7 @@
 .tasks-calendar {
   border-style: double;
   border-color: purple;
-  border-radius: 5%;
   color: white;
-  backdrop-filter: blur(2.4px);
-  height: 50vh;
-  width: 100%;
   overflow-y: scroll;
 }
 
@@ -71,7 +67,6 @@
 .new-task-form {
   border-style: double;
   border-color: purple;
-  border-radius: 5%;
   color: white;
   backdrop-filter: blur(2.4px);
   height: 50vh;
