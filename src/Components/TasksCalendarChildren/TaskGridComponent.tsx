@@ -23,8 +23,8 @@ interface TaskListProps {
 const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => {
     const columns: GridColDef[] = [
         { field: 'id', headerName: '№', width: 70 },
-        { field: 'title', headerName: 'Task title', width: 250 },
-        { field: 'description', headerName: 'Description', width: 130 },
+        { field: 'title', headerName: 'Task title', width: 130 },
+        { field: 'description', headerName: 'Description', width: 25 },
         { field: 'deadline', headerName: 'Deadline', width: 130 },
         { field: 'isCompleted', headerName: 'Status', width: 130 },
     ];

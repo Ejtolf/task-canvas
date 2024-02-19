@@ -18,7 +18,7 @@ interface TaskDetailedProps {
 }
 
 const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
-    const checkTaskParameters = (parameter: boolean) => parameter ? "td-par-true" : "td-par-false";
+    const checkTaskParameters = (parameter: boolean) => parameter ? "td-par td-par-true" : "td-par td-par-false";
 
     if (!task) {
         return <div className="no-tasks-were-selected-text">No task selected</div>;
@@ -36,13 +36,17 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
                     <p>Deadline: {task.deadline || "-"}</p>
                 </div>
             </div>
-            <div className="td-left-info">
-                <p className={checkTaskParameters(task.isImportant)}>Important</p>
-                <p className={checkTaskParameters(task.isUrgently)}>Urgently</p>
-                <p>{task.isCompleted}</p>
-            </div>
-            <div className="td-right-info">
-                <p>{task.description || "No description available."}</p>
+            <div className="td-general-info">
+                <div className="td-left-info">
+                    <p className={checkTaskParameters(task.isImportant)}>Important</p>
+                    <hr />
+                    <p className={checkTaskParameters(task.isUrgently)}>Urgently</p>
+                    <hr />
+                    <p>{task.isCompleted}</p>
+                </div>
+                <div className="td-right-info">
+                    <p className="td-task-description">{task.description || "No description available."}</p>
+                </div>
             </div>
         </div>
     );
