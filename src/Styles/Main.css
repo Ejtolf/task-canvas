@@ -9,22 +9,32 @@
   }
 }
 
-.content-inside .higher {
+.main {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.Header {
   width: 100%;
-  align-items: center;
-  animation: hasBeenAppeared 0.3s ease-in forwards;
+  animation: hasBeenAppeared 0.4s ease-in forwards;
 }
 
-.info-span {
-  flex: 0 0 40%;
-  height: 50vh;
-  max-height: 50vh;
+.content-inside {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  animation: hasBeenAppeared 0.5s ease-in forwards;
 }
 
+.higher {
+  display: flex;
+  /* flex: 1; */
+  width: 100%;
+}
+
+.info-span,
 .tasks-span {
-  flex: 0 0 60%;
-  height: 50vh;
-  max-height: 50vh;
+  width: 50%;
+  box-sizing: border-box;
 }

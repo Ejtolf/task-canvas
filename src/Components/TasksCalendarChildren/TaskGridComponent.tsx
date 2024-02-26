@@ -46,8 +46,8 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => 
     };
 
     return (
-        <div className="tasks-calendar">
-            <div style={{ height: '50vh' }}>
+        <div className="tasksCalendar">
+            <div className="tasks-grid">
                 <DataGrid
                     rows={rows}
                     columns={columns}

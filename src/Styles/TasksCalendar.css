@@ -1,26 +1,20 @@
-.tasks-calendar {
+.tasksCalendar {
   border-style: double;
   border-color: purple;
   color: white;
   overflow-y: scroll;
+  height: 50vh;
+  width: 100%;
+  flex: 1;
 }
 
-@keyframes DataGridBackground {
-  0% {
-    box-shadow: 0 0 10px red;
-  }
-  50% {
-    box-shadow: 0 0 10px purple;
-  }
-  100% {
-    box-shadow: 0 0 10px red;
-  }
+.tasks-grid {
+  height: 50vh;
 }
 
 .MuiDataGrid-root {
   background-color: hsla(240, 100%, 36%, 0.15);
   backdrop-filter: blur(40);
-  /* Animation */
   border-style: none;
   animation-name: DataGridBackground;
   animation-duration: 5s;
@@ -183,4 +177,16 @@
 
 .PrivateSwitchBase-input {
   background-color: blue;
+}
+
+@keyframes DataGridBackground {
+  0% {
+    box-shadow: 0 0 10px red;
+  }
+  50% {
+    box-shadow: 0 0 10px purple;
+  }
+  100% {
+    box-shadow: 0 0 10px red;
+  }
 }

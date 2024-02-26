@@ -8,19 +8,16 @@ import "../Styles/Main.css"
 
 export default function Main() {
     return (
-        <div className="main">
+        <div className="main">I
             <Header />
-            <div className="content-inside">
-                <div className="higher">
+            <div className="higher">
+                <div className="content-inside">
                     <span className="info-span">
                         <InformationBlock />
                     </span>
                     <span className="tasks-span">
                         <TasksCalendar />
                     </span>
-                </div>
-                <div className="lower">
-                    {/* <TaskGraphs /> */}
                 </div>
             </div>
         </div>

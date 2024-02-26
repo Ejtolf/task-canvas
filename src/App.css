@@ -1,11 +1,5 @@
 body {
   background-color: black;
-  background-size: cover;
-}
-
-body::before {
-  filter: blur(20px);
-  position: absolute;
 }
 
 .App {
