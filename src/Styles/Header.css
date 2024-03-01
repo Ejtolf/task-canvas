@@ -1,21 +1,6 @@
-@keyframes BackgroundColorSteam {
-  0% {
-    background-color: hsla(240, 100%, 65%, 0.15);
-  }
-  50% {
-    background-color: hsla(240, 20%, 48%, 0.15);
-  }
-  100% {
-    background-color: hsla(240, 100%, 65%, 0.15);
-  }
-}
-
 .header {
   display: flex;
   align-items: center;
-  animation-name: BackgroundColorSteam;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
   border-style: double;
   border-color: purple;
   border-radius: 10px;

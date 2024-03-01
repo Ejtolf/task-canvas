@@ -19,6 +19,15 @@ interface TaskDetailedProps {
 
 const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
     const checkTaskParameters = (parameter: boolean) => parameter ? "td-par td-par-true" : "td-par td-par-false";
+    const checkTaskCompleted = () => {
+        if (task?.isCompleted == "Completed") {
+            return "td-par-completed td-task-completed";
+        } else if (task?.isCompleted == "In process") {
+            return "td-par-completed td-task-in-process";
+        } else {
+            return "td-par-completed td-task-not-completed"
+        }
+    }
 
     if (!task) {
         return <div className="no-tasks-were-selected-text">No task selected</div>;
@@ -42,7 +51,7 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
                     <hr />
                     <p className={checkTaskParameters(task.isUrgently)}>Urgently</p>
                     <hr />
-                    <p>{task.isCompleted}</p>
+                    <p className={checkTaskCompleted()}>{task.isCompleted}</p>
                 </div>
                 <div className="td-right-info">
                     <p className="td-task-description">{task.description || "No description available."}</p>

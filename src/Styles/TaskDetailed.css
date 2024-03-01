@@ -1,5 +1,4 @@
 .taskDetailed {
-  /* display: flex; */
   border: 1px solid purple;
   color: white;
   border-radius: 8px;
@@ -44,4 +43,32 @@
 
 .td-title {
   overflow: auto;
+  max-height: 100px;
+  background-color: #000025;
+}
+
+.td-par-false {
+  text-decoration: line-through;
+  color: white;
+  text-shadow: 0 0 10px lime;
+}
+
+.td-par-true {
+  color: white;
+  text-shadow: 0 0 10px orange;
+}
+
+.td-task-completed {
+  color: white;
+  text-shadow: 0 0 10px lime;
+}
+
+.td-task-in-process {
+  color: white;
+  text-shadow: 0 0 10px yellow;
+}
+
+.td-task-not-completed {
+  color: white;
+  text-shadow: 0 0 10px red;
 }
