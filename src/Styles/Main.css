@@ -40,5 +40,5 @@
 }
 
 .info-span {
-  display: block;
+  display: grid;
 }
