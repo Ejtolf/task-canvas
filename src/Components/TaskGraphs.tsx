@@ -5,7 +5,7 @@ import "../Styles/TaskGraphs.css";
 //TODO: "Таблица Канбан".
 const KanbanGridComponent: React.FC = () => {
     return (
-        <div className="task-graphs">
+        <div className="TaskGraphs">
             <div className="kanban-board">
                 <div className="column todo">
                     <h3 className="kanban-header-h2-todo">To Do</h3>
@@ -45,7 +45,7 @@ const TaskGraphs: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className="taskGraphs">
             <div className="graphs-header-buttons">
                 <button className="MatrixMode" onClick={() => handleChangeMode(1)}>Matrix...</button>
                 <button className="KANBANMODE" onClick={() => handleChangeMode(2)}>KANBAN</button>

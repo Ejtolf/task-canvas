@@ -8,12 +8,13 @@ import "../Styles/Main.css"
 
 export default function Main() {
     return (
-        <div className="main">I
+        <div className="main">
             <Header />
             <div className="higher">
                 <div className="content-inside">
                     <span className="info-span">
                         <InformationBlock />
+                        <TaskGraphs />
                     </span>
                     <span className="tasks-span">
                         <TasksCalendar />

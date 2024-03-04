@@ -38,3 +38,7 @@
   width: 50%;
   box-sizing: border-box;
 }
+
+.info-span {
+  display: block;
+}

@@ -30,7 +30,11 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
     }
 
     if (!task) {
-        return <div className="no-tasks-were-selected-text">No task selected</div>;
+        return (
+            <div className="taskDetailed">
+                <div className="no-tasks-were-selected-text">No task selected</div>
+            </div>
+        );
     }
 
     return (

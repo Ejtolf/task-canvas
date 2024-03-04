@@ -4,6 +4,7 @@ import IsTaskPreparingContext from '../Context/contexts';
 import TaskPreparingComponent from './TasksCalendarChildren/TaskPreparingComponent';
 import TaskGridComponent from './TasksCalendarChildren/TaskGridComponent';
 import TaskDetailed from './TaskDetailed';
+import TaskGraphs from "./TaskGraphs";
 
 import '../Styles/TasksCalendar.css';
 

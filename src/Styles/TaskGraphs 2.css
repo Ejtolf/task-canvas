@@ -1,18 +1,17 @@
-.taskGraphs {
+.task-graphs {
   background-color: white;
-  /* width: 50%; */
+  width: 50%;
   overflow: y;
   background-color: #000033;
   color: white;
 }
 
 .kanban-board {
-  width: 100%;
   display: flex;
   justify-content: space-around;
   overflow-y: scroll;
   max-height: 40vh;
-  height: max-content;
+  width: 50vh;
   border-style: solid;
   border-color: purple;
   background-color: #000033;
@@ -74,4 +73,8 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
   text-shadow: 0 0 10px green;
+}
+
+.kanban-board {
+  width: 200%;
 }
