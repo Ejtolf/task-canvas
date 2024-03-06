@@ -12,11 +12,7 @@ const IsTaskPrepairingContext = createContext<ContextValue>({
 
 export default IsTaskPrepairingContext;
 
-export const IsTaskPrepairingProvider = ({
-    children,
-}: {
-    children: React.ReactNode;
-}) => {
+export const IsTaskPrepairingProvider = ({ children }: { children: React.ReactNode }) => {
     const [isTaskPreparing, setIsTaskPreparing] = useState(false);
 
     return (
@@ -27,3 +23,4 @@ export const IsTaskPrepairingProvider = ({
         </IsTaskPrepairingContext.Provider>
     );
 };
+

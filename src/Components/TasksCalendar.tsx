@@ -1,10 +1,9 @@
 // TasksCalendar.tsx
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import IsTaskPreparingContext from '../Context/contexts';
 import TaskPreparingComponent from './TasksCalendarChildren/TaskPreparingComponent';
 import TaskGridComponent from './TasksCalendarChildren/TaskGridComponent';
 import TaskDetailed from './TaskDetailed';
-import TaskGraphs from "./TaskGraphs";
 
 import '../Styles/TasksCalendar.css';
 
@@ -21,9 +20,10 @@ interface Task {
 
 interface TasksCalendarProps {
     taskList?: Task[];
+    getTaskList?: () => Task[] | undefined
 }
 
-const TasksCalendar: React.FC<TasksCalendarProps> = () => {
+const TasksCalendar: React.FC<TasksCalendarProps & { setNumberOfTasks: (num: number) => void }> = ({ taskList, getTaskList, setNumberOfTasks }) => {
     const { isTaskPreparing } = useContext(IsTaskPreparingContext);
 
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -37,6 +37,11 @@ const TasksCalendar: React.FC<TasksCalendarProps> = () => {
         console.log(chosenTask);
         setChosenTaskId(chosenTask.id);
     };
+
+    useEffect(() => {
+        setNumberOfTasks(tasks.length);
+    }, [tasks, setNumberOfTasks]);
+
 
     return (
         <>
