@@ -1,9 +1,14 @@
 import React from "react";
+import Task from "./Task";
 
 import "../Styles/TaskGraphs.css";
 
+interface TaskGraphsProps {
+    tasks?: Task[];
+}
+
 //TODO: "Таблица Канбан".
-const KanbanGridComponent: React.FC = () => {
+const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
     return (
         <div className="TaskGraphs">
             <div className="kanban-board">
@@ -37,7 +42,7 @@ const AnotherOneMatrix: React.FC = () => {
     return <h1>???</h1>
 }
 
-const TaskGraphs: React.FC = () => {
+const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
     const [mode, setMode] = React.useState<number>(1);
 
     const handleChangeMode = (numberOfMode: number) => {
@@ -56,7 +61,7 @@ const TaskGraphs: React.FC = () => {
                     case 1:
                         return <MatrixFirst />
                     case 2:
-                        return <KanbanGridComponent />
+                        return <KanbanGridComponent tasks={tasks} />
                     default:
                         return <AnotherOneMatrix />
                 }

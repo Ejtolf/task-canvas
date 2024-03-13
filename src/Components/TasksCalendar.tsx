@@ -19,29 +19,26 @@ interface Task {
 }
 
 interface TasksCalendarProps {
-    taskList?: Task[];
-    getTaskList?: () => Task[] | undefined
+    setTasks: (tasks: Task[]) => void;
 }
 
-const TasksCalendar: React.FC<TasksCalendarProps & { setNumberOfTasks: (num: number) => void }> = ({ taskList, getTaskList, setNumberOfTasks }) => {
+const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
     const { isTaskPreparing } = useContext(IsTaskPreparingContext);
 
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setInternalTasks] = useState<Task[]>([]);
     const [chosenTaskId, setChosenTaskId] = useState<number | undefined>(undefined);
 
     const handleTaskAdd = (newTask: Task) => {
-        setTasks((old) => [...old, newTask]);
+        setInternalTasks((old) => [...old, newTask]);
     };
 
     const handleChooseTask = (chosenTask: Task) => {
-        console.log(chosenTask);
         setChosenTaskId(chosenTask.id);
     };
 
     useEffect(() => {
-        setNumberOfTasks(tasks.length);
-    }, [tasks, setNumberOfTasks]);
-
+        setTasks(tasks);
+    }, [tasks, setTasks]);
 
     return (
         <>

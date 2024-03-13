@@ -1,28 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import IsTaskPreparingContext from "../Context/contexts";
+import Task from "./Task";
 
 import "../Styles/InformationBlock.css";
 
-interface Task {
-    id: number;
-    title: string;
-    description?: string;
-    generationTime?: Date;
-    deadline?: string;
-    isImportant: boolean;
-    isUrgently: boolean;
-    isCompleted: string;
-}
 
 interface InformationBlockProps {
-    tasks: number
+    tasks?: Task[];
 }
 
 const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
     const { isTaskPreparing, setIsTaskPreparing } = useContext(IsTaskPreparingContext);
 
-    // const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
     const [numberOfTasksForToday, setNumberOfTasksForToday] = useState<number>(0);
     const [numberOfTasksForTomorrow, setNumberOfTasksForTomorrow] = useState<number>(0);
     const [lastTaskTime, setLastTaskTime] = useState<string | number | Date>(0);
@@ -59,13 +49,13 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
     return (
         <div className="informationBlock">
             <div className="left-column">
-                <p className="information-panel-text">Tasks: {tasks}</p>
+                <p className="information-panel-text">Tasks: {tasks?.length}</p>
                 <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
                 <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
                 <p className="information-panel-text">{
-                    (numberOfTasksForToday === 0) ?
+                    (tasks?.length == 0) ?
                         "All tasks done." :
-                        `Tasks remains: ${tasksRemains}`
+                        `Tasks remains: ${tasks?.length}`
                 }</p>
             </div>
             <div className="right-column">

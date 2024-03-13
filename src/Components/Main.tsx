@@ -3,11 +3,12 @@ import Header from "./Header";
 import InformationBlock from "./InformationBlock";
 import TasksCalendar from "./TasksCalendar";
 import TaskGraphs from "./TaskGraphs";
+import Task from "./Task";
 
 import "../Styles/Main.css"
 
 export default function Main() {
-    const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
+    const [tasks, setTasks] = useState<Task[]>([]);
 
     return (
         <div className="main">
@@ -15,11 +16,11 @@ export default function Main() {
             <div className="higher">
                 <div className="content-inside">
                     <span className="info-span">
-                        <InformationBlock tasks={numberOfTasks} />
+                        <InformationBlock tasks={tasks} />
                         <TaskGraphs />
                     </span>
                     <span className="tasks-span">
-                        <TasksCalendar setNumberOfTasks={setNumberOfTasks} />
+                        <TasksCalendar setTasks={setTasks} />
                     </span>
                 </div>
             </div>
