@@ -76,3 +76,31 @@
   color: white;
   text-shadow: 0 0 10px green;
 }
+
+.eisenhower-matrix {
+  display: flex;
+  flex-wrap: wrap;
+  height: max-content;
+  width: 100%;
+}
+
+.quadrant {
+  flex: 50%;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+#important-urgent {
+  background-color: #f8d7da;
+}
+#important-not-urgent {
+  background-color: #d1ecf1;
+}
+#not-important-urgent {
+  background-color: #fff3cd;
+}
+#not-important-not-urgent {
+  background-color: #d4edda;
+}

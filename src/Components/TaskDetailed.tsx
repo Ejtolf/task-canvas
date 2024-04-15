@@ -2,6 +2,7 @@ import React from 'react';
 
 import "../Styles/TaskDetailed.css";
 
+
 interface Task {
     id: number;
     title: string;
@@ -19,12 +20,14 @@ interface TaskDetailedProps {
 
 const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
     const checkTaskParameters = (parameter: boolean) => parameter ? "td-par td-par-true" : "td-par td-par-false";
+
     const checkTaskCompleted = () => {
-        if (task?.isCompleted == "Completed") {
+        // Not completed, In process, To do
+        if (task?.isCompleted == "Completed") { // Completed
             return "td-par-completed td-task-completed";
-        } else if (task?.isCompleted == "In process") {
+        } else if (task?.isCompleted == "In process") { // In process
             return "td-par-completed td-task-in-process";
-        } else {
+        } else { // No completed
             return "td-par-completed td-task-not-completed"
         }
     }

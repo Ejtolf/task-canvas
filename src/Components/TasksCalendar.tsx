@@ -4,19 +4,9 @@ import IsTaskPreparingContext from '../Context/contexts';
 import TaskPreparingComponent from './TasksCalendarChildren/TaskPreparingComponent';
 import TaskGridComponent from './TasksCalendarChildren/TaskGridComponent';
 import TaskDetailed from './TaskDetailed';
+import Task from "./Task";
 
 import '../Styles/TasksCalendar.css';
-
-interface Task {
-    id: number;
-    title: string;
-    description?: string;
-    generationTime?: Date;
-    deadline?: string;
-    isImportant: boolean;
-    isUrgently: boolean;
-    isCompleted: string;
-}
 
 interface TasksCalendarProps {
     setTasks: (tasks: Task[]) => void;

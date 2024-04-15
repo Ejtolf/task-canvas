@@ -55,7 +55,7 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
                 <p className="information-panel-text">{
                     (tasks?.length == 0) ?
                         "All tasks done." :
-                        `Tasks remains: ${tasks?.length}`
+                        `Tasks left: ${tasks?.length}`
                 }</p>
             </div>
             <div className="right-column">
