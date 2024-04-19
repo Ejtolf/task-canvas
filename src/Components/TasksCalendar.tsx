@@ -1,4 +1,3 @@
-// TasksCalendar.tsx
 import React, { useContext, useState, useEffect } from 'react';
 import IsTaskPreparingContext from '../Context/contexts';
 import TaskPreparingComponent from './TasksCalendarChildren/TaskPreparingComponent';
@@ -18,8 +17,19 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
     const [tasks, setInternalTasks] = useState<Task[]>([]);
     const [chosenTaskId, setChosenTaskId] = useState<number | undefined>(undefined);
 
+    const handleUpdateTaskStatus = (taskId: number, newStatus: string) => {
+        setInternalTasks((oldTasks) =>
+            oldTasks.map((task) => {
+                if (task.id === taskId) {
+                    return { ...task, isCompleted: newStatus };
+                }
+                return task;
+            })
+        );
+    };
+
     const handleTaskAdd = (newTask: Task) => {
-        setInternalTasks((old) => [...old, newTask]);
+        setInternalTasks((oldTasks) => [...oldTasks, newTask]);
     };
 
     const handleChooseTask = (chosenTask: Task) => {
@@ -38,7 +48,7 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
                 <TaskGridComponent tasks={tasks} onTaskChoice={handleChooseTask} />
             )}
 
-            <TaskDetailed task={tasks.find((task) => task.id === chosenTaskId)} />
+            <TaskDetailed task={tasks.find((task) => task.id === chosenTaskId)} taskId={chosenTaskId} onUpdateTaskStatus={handleUpdateTaskStatus} />
         </>
     );
 };

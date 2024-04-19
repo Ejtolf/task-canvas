@@ -1,33 +1,31 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import Status from "./CompletedStatuses";
+import Task from "./Task";
 import "../Styles/TaskDetailed.css";
-
-
-interface Task {
-    id: number;
-    title: string;
-    description?: string;
-    generationTime?: Date;
-    deadline?: string;
-    isImportant: boolean;
-    isUrgently: boolean;
-    isCompleted: string;
-}
 
 interface TaskDetailedProps {
     task: Task | undefined;
+    taskId?: number;
+    onUpdateTaskStatus: (taskId: number, newStatus: string) => void;
 }
 
-const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
+const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskStatus }) => {
+    const [currentStatus, setCurrentStatus] = useState<string>(task?.isCompleted || "");
+
+    const handleStatusChange = (newStatus: string) => {
+        if (taskId !== undefined) {
+            onUpdateTaskStatus(taskId, newStatus);
+        }
+    };
+
     const checkTaskParameters = (parameter: boolean) => parameter ? "td-par td-par-true" : "td-par td-par-false";
 
     const checkTaskCompleted = () => {
-        // Not completed, In process, To do
-        if (task?.isCompleted == "Completed") { // Completed
+        if (task?.isCompleted === Status[2]) {
             return "td-par-completed td-task-completed";
-        } else if (task?.isCompleted == "In process") { // In process
+        } else if (task?.isCompleted === Status[1]) {
             return "td-par-completed td-task-in-process";
-        } else { // No completed
+        } else {
             return "td-par-completed td-task-not-completed"
         }
     }
@@ -58,7 +56,15 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task }) => {
                     <hr />
                     <p className={checkTaskParameters(task.isUrgently)}>Urgently</p>
                     <hr />
-                    <p className={checkTaskCompleted()}>{task.isCompleted}</p>
+                    <p className="td-status">
+                        <select value={currentStatus} onChange={(e) => handleStatusChange(e.target.value)}>
+                            {Object.values(Status).map((status, index) => (
+                                <option key={index} value={status}>
+                                    {status}
+                                </option>
+                            ))}
+                        </select>
+                    </p>
                 </div>
                 <div className="td-right-info">
                     <p className="td-task-description">{task.description || "No description available."}</p>
