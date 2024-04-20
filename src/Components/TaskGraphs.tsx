@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "./Task";
+import CompletedStatuses from "./CompletedStatuses";
 
 import "../Styles/TaskGraphs.css";
 
@@ -9,9 +10,9 @@ interface TaskGraphsProps {
 
 //TODO: "Kanban task".
 const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
-    const completedTasks = tasks?.filter(task => task.isCompleted === "Completed");
-    const inProcessTasks = tasks?.filter(task => task.isCompleted === 'In process');
-    const notCompletedTasks = tasks?.filter(task => task.isCompleted === 'Not completed');
+    const completedTasks = tasks?.filter(task => task.isCompleted === CompletedStatuses[2]); // Completed.
+    const inProcessTasks = tasks?.filter(task => task.isCompleted === CompletedStatuses[1]); // In process.
+    const notCompletedTasks = tasks?.filter(task => task.isCompleted === CompletedStatuses[0]); // Not completed.
 
     return (
         <div className="kanban-board">

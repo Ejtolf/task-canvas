@@ -10,7 +10,7 @@ interface TaskDetailedProps {
 }
 
 const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskStatus }) => {
-    const [currentStatus, setCurrentStatus] = useState<string>(task?.isCompleted || "");
+    const [currentStatus] = useState<string>(task?.isCompleted || "");
 
     const handleStatusChange = (newStatus: string) => {
         if (taskId !== undefined) {

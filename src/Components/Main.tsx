@@ -17,7 +17,7 @@ export default function Main() {
                 <div className="content-inside">
                     <span className="info-span">
                         <InformationBlock tasks={tasks} />
-                        <TaskGraphs />
+                        <TaskGraphs tasks={tasks} />
                     </span>
                     <span className="tasks-span">
                         <TasksCalendar setTasks={setTasks} />
