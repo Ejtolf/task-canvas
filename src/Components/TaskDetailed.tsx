@@ -10,11 +10,12 @@ interface TaskDetailedProps {
 }
 
 const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskStatus }) => {
-    const [currentStatus] = useState<string>(task?.isCompleted || "");
+    const [currentStatus, setCurrentStatus] = useState<string>(task?.isCompleted || "");
 
     const handleStatusChange = (newStatus: string) => {
         if (taskId !== undefined) {
             onUpdateTaskStatus(taskId, newStatus);
+            setCurrentStatus(newStatus);
         }
     };
 
@@ -58,8 +59,8 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskS
                     <hr />
                     <p className="td-status">
                         <select value={currentStatus} onChange={(e) => handleStatusChange(e.target.value)}>
-                            {Object.values(Status).map((status, index) => (
-                                <option key={index} value={status}>
+                            {Object.values(Status).map((status) => (
+                                <option value={status}>
                                     {status}
                                 </option>
                             ))}
