@@ -17,21 +17,21 @@ const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
     return (
         <div className="kanban-board">
             <div className="column todo">
-                <h3 className="kanban-header-h2-todo">To Do</h3>
+                <h3 className="kanban-header-h2-todo">To Do ({notCompletedTasks?.length})</h3>
                 {/* Rendering tasks marked as 'Not completed' */}
                 {notCompletedTasks?.map(task => (
                     <div className="task" key={task.id}>{task.id}: {task.title}</div>
                 ))}
             </div>
             <div className="column in-process">
-                <h3 className="kanban-header-h2-in-process">In Process</h3>
+                <h3 className="kanban-header-h2-in-process">In Process ({inProcessTasks?.length})</h3>
                 {/* Rendering tasks marked as 'In process' */}
                 {inProcessTasks?.map(task => (
                     <div className="task" key={task.id}>{task.id}: {task.title}</div>
                 ))}
             </div>
             <div className="column done">
-                <h3 className="kanban-header-h2-done">Done</h3>
+                <h3 className="kanban-header-h2-done">Done ({completedTasks?.length})</h3>
                 {/* Rendering tasks marked as 'Completed' */}
                 {completedTasks?.map(task => (
                     <div className="task" key={task.id}>{task.id}: {task.title}</div>
@@ -44,6 +44,11 @@ const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
 //TODO: Матрица Эйзенхауэра.
 const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
     // return <h1>Матрица Эйзенхауэра</h1>
+    const IMP_URG = tasks?.filter(task => task.isImportant === true && task.isUrgently === true);
+    const IMP_nURG = tasks?.filter(task => task.isImportant === true && task.isUrgently === false);
+    const nIMP_URG = tasks?.filter(task => task.isImportant === false && task.isUrgently === true);
+    const nIMP_nURG = tasks?.filter(task => task.isImportant === false && task.isUrgently === false);
+
     return (
         <div className="eisenhower-matrix">
             <div className="em-matrix-part">
@@ -51,32 +56,41 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                     tasks !== undefined ? (<>
                         {/* Important & Urgent */}
                         <div className="quadrant" id="important-urgent">
-                            {tasks.map((task, id) => (
+                            {IMP_URG?.map((task, id) => (
                                 <p className="task-list-for-matrix" key={id}>{task.title}</p>
                             ))}
                         </div>
                         {/* Important & Not Urgent */}
                         <div className="quadrant" id="important-not-urgent">
-                            {tasks.map((task, id) => (
+                            {IMP_nURG?.map((task, id) => (
                                 <p className="task-list-for-matrix" key={id}>{task.title}</p>
                             ))}
                         </div>
                         {/* Not Important & Urgent */}
                         <div className="quadrant" id="not-important-urgent">
-                            {tasks.map((task, id) => (
+                            {nIMP_URG?.map((task, id) => (
                                 <p className="task-list-for-matrix" key={id}>{task.title}</p>
                             ))}
                         </div>
                         {/* Not Important & Not Urgent */}
                         <div className="quadrant" id="not-important-not-urgent">
-                            {tasks.map((task, id) => (
+                            {nIMP_nURG?.map((task, id) => (
                                 <p className="task-list-for-matrix" key={id}>{task.title}</p>
                             ))}
                         </div>
                     </>) : (<h1>Tasks Not Found.</h1>)}
             </div>
             <div className="em-statistics-part">
-                STATISTICS...
+                <h1>STATISTICS</h1>
+                <hr />
+                <h4>Important & Urgently</h4>
+                <p>{IMP_URG?.length}</p>
+                <h4>Important & Not urgently</h4>
+                <p>{IMP_nURG?.length}</p>
+                <h4>Not important & Urgently</h4>
+                <p>{nIMP_URG?.length}</p>
+                <h4>Not important & Not urgently</h4>
+                <p>{nIMP_nURG?.length}</p>
             </div>
         </div>
     )
