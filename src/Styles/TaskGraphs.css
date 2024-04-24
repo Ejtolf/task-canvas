@@ -144,7 +144,7 @@
   box-shadow: 0 0 20px yellow;
   text-align: center;
   min-width: 200px;
-  max-height: 200px;
+  /* max-height: 200px; */
   overflow: auto;
   flex-direction: column;
 }
@@ -152,4 +152,33 @@
 .em-statistics-part {
   background-color: black;
   text-align: center;
+}
+
+.em-statistics-part h4:hover,
+.em-statistics-part h4:focus {
+  background-color: #f2f2f2;
+}
+
+.em-matrix-part .quadrant {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.em-statistics-part h4:hover ~ .em-matrix-part #important-urgent,
+.em-statistics-part h4:focus ~ .em-matrix-part #important-urgent {
+  background-color: #f2f2f2;
+}
+
+.em-statistics-part h4:hover ~ .em-matrix-part #important-not-urgent,
+.em-statistics-part h4:focus ~ .em-matrix-part #important-not-urgent {
+  background-color: #f2f2f2;
+}
+
+.em-statistics-part h4:hover ~ .em-matrix-part #not-important-urgent,
+.em-statistics-part h4:focus ~ .em-matrix-part #not-important-urgent {
+  background-color: #f2f2f2;
+}
+
+.em-statistics-part h4:hover ~ .em-matrix-part #not-important-not-urgent,
+.em-statistics-part h4:focus ~ .em-matrix-part #not-important-not-urgent {
+  background-color: #f2f2f2;
 }

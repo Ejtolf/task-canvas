@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Task from "./Task";
 import CompletedStatuses from "./CompletedStatuses";
 
@@ -43,57 +43,60 @@ const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
 
 //TODO: Матрица Эйзенхауэра.
 const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
-    // return <h1>Матрица Эйзенхауэра</h1>
     const IMP_URG = tasks?.filter(task => task.isImportant === true && task.isUrgently === true);
     const IMP_nURG = tasks?.filter(task => task.isImportant === true && task.isUrgently === false);
     const nIMP_URG = tasks?.filter(task => task.isImportant === false && task.isUrgently === true);
     const nIMP_nURG = tasks?.filter(task => task.isImportant === false && task.isUrgently === false);
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
         <div className="eisenhower-matrix">
             <div className="em-matrix-part">
-                {
-                    tasks !== undefined ? (<>
-                        {/* Important & Urgent */}
-                        <div className="quadrant" id="important-urgent">
-                            {IMP_URG?.map((task, id) => (
-                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
-                            ))}
-                        </div>
-                        {/* Important & Not Urgent */}
-                        <div className="quadrant" id="important-not-urgent">
-                            {IMP_nURG?.map((task, id) => (
-                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
-                            ))}
-                        </div>
-                        {/* Not Important & Urgent */}
-                        <div className="quadrant" id="not-important-urgent">
-                            {nIMP_URG?.map((task, id) => (
-                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
-                            ))}
-                        </div>
-                        {/* Not Important & Not Urgent */}
-                        <div className="quadrant" id="not-important-not-urgent">
-                            {nIMP_nURG?.map((task, id) => (
-                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
-                            ))}
-                        </div>
-                    </>) : (<h1>Tasks Not Found.</h1>)}
+                <div className="quadrant" id="important-urgent">
+                    {IMP_URG?.map((task, id) => (
+                        <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                    ))}
+                </div>
+                <div className="quadrant" id="important-not-urgent">
+                    {IMP_nURG?.map((task, id) => (
+                        <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                    ))}
+                </div>
+                <div className="quadrant" id="not-important-urgent">
+                    {nIMP_URG?.map((task, id) => (
+                        <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                    ))}
+                </div>
+                <div className="quadrant" id="not-important-not-urgent">
+                    {nIMP_nURG?.map((task, id) => (
+                        <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                    ))}
+                </div>
             </div>
             <div className="em-statistics-part">
                 <h1>STATISTICS</h1>
                 <hr />
-                <h4>Important & Urgently</h4>
+                <h4 className="imp-urg-lab" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Important & Urgent</h4>
                 <p>{IMP_URG?.length}</p>
-                <h4>Important & Not urgently</h4>
+                <h4 className="imp-nurg-lab" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Important & Not Urgent</h4>
                 <p>{IMP_nURG?.length}</p>
-                <h4>Not important & Urgently</h4>
+                <h4 className="nimp-urg-lab" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Not Important & Urgent</h4>
                 <p>{nIMP_URG?.length}</p>
-                <h4>Not important & Not urgently</h4>
+                <h4 className="nimp-nurg-lab" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Not Important & Not Urgent</h4>
                 <p>{nIMP_nURG?.length}</p>
             </div>
         </div>
-    )
+    );
+
 }
 
 //TODO: Ещё не придумано.
