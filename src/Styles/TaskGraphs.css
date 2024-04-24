@@ -1,6 +1,6 @@
 .taskGraphs {
   background-color: white;
-  /* width: 50%; */
+  max-height: 100%;
   overflow: y;
   background-color: #000033;
   color: white;
@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  overflow-y: scroll;
+  overflow: scroll;
   max-height: 40vh;
   height: max-content;
   border-style: solid;
@@ -77,19 +77,21 @@
   text-shadow: 0 0 10px green;
 }
 
-.eisenhower-matrix {
+/* .eisenhower-matrix {
   display: flex;
   flex-wrap: wrap;
   height: max-content;
   width: 100%;
+  display: grid;
 }
 
 .quadrant {
   flex: 50%;
-  box-sizing: border-box;
   padding: 20px;
   border: 1px solid #ccc;
   text-align: center;
+  overflow: scroll;
+  flex-direction: column;
 }
 
 #important-urgent {
@@ -103,4 +105,50 @@
 }
 #not-important-not-urgent {
   background-color: #d4edda;
+}
+
+.em-matrix-part {
+  width: 70%;
+  display: contents;
+}
+
+.em-statistics-part {
+  width: 30%;
+  background-color: white;
+} */
+
+/* Eisenhower Matrix CSS */
+
+.eisenhower-matrix {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  height: 50vh;
+}
+
+.em-matrix-part,
+.em-statistics-part {
+  border: 1px solid #ccc;
+  /* padding: 1em; */
+}
+
+.em-matrix-part {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  overflow: auto;
+}
+
+.quadrant {
+  background-color: #000033;
+  border-style: solid;
+  /* border-color: yellow; */
+  box-shadow: 0 0 20px yellow;
+  text-align: center;
+  min-width: 200px;
+  max-height: 200px;
+  overflow: auto;
+  flex-direction: column;
+}
+
+.em-statistics-part {
+  background-color: white;
 }

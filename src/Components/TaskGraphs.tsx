@@ -20,21 +20,21 @@ const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
                 <h3 className="kanban-header-h2-todo">To Do</h3>
                 {/* Rendering tasks marked as 'Not completed' */}
                 {notCompletedTasks?.map(task => (
-                    <div className="task" key={task.id}>{task.title}</div>
+                    <div className="task" key={task.id}>{task.id}: {task.title}</div>
                 ))}
             </div>
             <div className="column in-process">
                 <h3 className="kanban-header-h2-in-process">In Process</h3>
                 {/* Rendering tasks marked as 'In process' */}
                 {inProcessTasks?.map(task => (
-                    <div className="task" key={task.id}>{task.title}</div>
+                    <div className="task" key={task.id}>{task.id}: {task.title}</div>
                 ))}
             </div>
             <div className="column done">
                 <h3 className="kanban-header-h2-done">Done</h3>
                 {/* Rendering tasks marked as 'Completed' */}
                 {completedTasks?.map(task => (
-                    <div className="task" key={task.id}>{task.title}</div>
+                    <div className="task" key={task.id}>{task.id}: {task.title}</div>
                 ))}
             </div>
         </div>
@@ -46,13 +46,38 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
     // return <h1>Матрица Эйзенхауэра</h1>
     return (
         <div className="eisenhower-matrix">
-            {
-                tasks?.length === 0 ? (<>
-                    <div className="quadrant" id="important-urgent">Important & Urgent</div>
-                    <div className="quadrant" id="important-not-urgent">Important & Not Urgent</div>
-                    <div className="quadrant" id="not-important-urgent">Not Important & Urgent</div>
-                    <div className="quadrant" id="not-important-not-urgent">Not Important & Not Urgent</div>
-                </>) : (<h1>Tasks Not Found.</h1>)}
+            <div className="em-matrix-part">
+                {
+                    tasks !== undefined ? (<>
+                        {/* Important & Urgent */}
+                        <div className="quadrant" id="important-urgent">
+                            {tasks.map((task, id) => (
+                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            ))}
+                        </div>
+                        {/* Important & Not Urgent */}
+                        <div className="quadrant" id="important-not-urgent">
+                            {tasks.map((task, id) => (
+                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            ))}
+                        </div>
+                        {/* Not Important & Urgent */}
+                        <div className="quadrant" id="not-important-urgent">
+                            {tasks.map((task, id) => (
+                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            ))}
+                        </div>
+                        {/* Not Important & Not Urgent */}
+                        <div className="quadrant" id="not-important-not-urgent">
+                            {tasks.map((task, id) => (
+                                <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            ))}
+                        </div>
+                    </>) : (<h1>Tasks Not Found.</h1>)}
+            </div>
+            <div className="em-statistics-part">
+                STATISTICS...
+            </div>
         </div>
     )
 }
