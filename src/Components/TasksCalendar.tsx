@@ -4,7 +4,6 @@ import TaskPreparingComponent from './TasksCalendarChildren/TaskPreparingCompone
 import TaskGridComponent from './TasksCalendarChildren/TaskGridComponent';
 import TaskDetailed from './TaskDetailed';
 import Task from "./Task";
-
 import '../Styles/TasksCalendar.css';
 
 interface TasksCalendarProps {
@@ -47,7 +46,6 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
             ) : (
                 <TaskGridComponent tasks={tasks} onTaskChoice={handleChooseTask} />
             )}
-
             <TaskDetailed task={tasks.find((task) => task.id === chosenTaskId)} taskId={chosenTaskId} onUpdateTaskStatus={handleUpdateTaskStatus} />
         </>
     );
