@@ -1,6 +1,6 @@
 .tasksCalendar {
   border-style: double;
-  border-color: purple;
+  border-color: #c5cfda;
   color: white;
   overflow-y: scroll;
   height: 50vh;
@@ -13,54 +13,42 @@
 }
 
 .MuiDataGrid-root {
-  background-color: hsla(240, 100%, 36%, 0.15);
+  background-color: #e7e7e7;
   backdrop-filter: blur(40);
   border-style: none;
-  animation-name: DataGridBackground;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
+}
+
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+  color: #000033;
 }
 
 .MuiDataGrid-cell {
-  color: white;
-  text-shadow: 0 0 1px cyan;
+  color: #000033;
+  text-shadow: 0 0 0.5px #c5cfda;
 }
 
 .MuiToolbar-gutters,
 .MuiSvgIcon-root {
-  color: white;
+  color: blue;
 }
 
 .MuiDataGrid-cell:hover {
-  text-shadow: 0 0 5px cyan;
-  transition: all 5ms ease;
   font-size: larger;
+  transition: all 5ms ease;
 }
 
 .MuiDataGrid-columnHeaderTitle {
-  color: white !important;
-  text-shadow: 0 0 5px purple;
+  color: #000033 !important;
+  text-shadow: 0 0 5px #c5cfda;
 }
 
 .PrivateSwitchBase-input {
-  color: white;
-}
-
-@keyframes textShadowAnimation {
-  0% {
-    text-shadow: 0 0 10px yellow;
-  }
-  50% {
-    text-shadow: 0 0 10px red;
-  }
-  100% {
-    text-shadow: 0 0 10px yellow;
-  }
+  color: #1976d2;
 }
 
 .new-task-form {
-  border-style: double;
-  border-color: purple;
+  border-style: solid;
+  border-color: #c5cfda;
   color: white;
   backdrop-filter: blur(2.4px);
   height: 50vh;
@@ -68,8 +56,7 @@
 }
 
 .new-task-title {
-  color: white;
-  animation: textShadowAnimation 1s linear infinite;
+  color: #000033;
   text-align: center;
 }
 
@@ -151,8 +138,8 @@
   justify-self: center;
   contain-intrinsic-height: 140px;
   border: none;
-  background-color: #000033;
-  color: #ffffff;
+  background-color: #c5cfda;
+  color: #000033;
   border-radius: 8px;
   box-sizing: border-box;
   resize: none;
@@ -163,8 +150,8 @@
 .deadline-input,
 .task-title-input {
   border: none;
-  background-color: #000033;
-  color: #ffffff;
+  background-color: #c5cfda;
+  color: #000033;
   border-radius: 8px;
   box-sizing: border-box;
   resize: none;
@@ -177,16 +164,4 @@
 
 .PrivateSwitchBase-input {
   background-color: blue;
-}
-
-@keyframes DataGridBackground {
-  0% {
-    box-shadow: 0 0 10px red;
-  }
-  50% {
-    box-shadow: 0 0 10px purple;
-  }
-  100% {
-    box-shadow: 0 0 10px red;
-  }
 }

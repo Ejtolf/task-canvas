@@ -1,10 +1,8 @@
 .informationBlock {
-  border-style: double;
-  border-color: purple;
-  color: white;
+  color: #000033;
   overflow-y: scroll;
-  height: 35vh;
-  width: 95%;
+  /* height: 35vh; */
+  /* width: 95%; */
   flex: 1;
 }
 
@@ -16,15 +14,15 @@
 .information-panel-text {
   font-family: "SFDigital";
   font-size: 30px;
-  color: white;
+  color: #000033;
   margin-left: 15px;
   margin-top: 10px;
 }
 
 .information-panel-text:hover {
-  background-color: #000033;
-  text-shadow: 0 0 10px yellow;
-  transition: all 0.01s ease-in;
+  background-color: #c5cfda;
+  text-shadow: 0 0 10px white;
+  transition: all 0.3s ease-in;
 }
 
 .left-column,
@@ -34,17 +32,18 @@
 }
 
 .p-tasks-count {
-  color: white;
+  color: #000033;
 }
 
 .informationBlock {
   float: right;
   position: sticky;
   bottom: 0;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .manager-buttons .MuiButtonBase-root {
-  display: block;
+  display: flex;
+  width: 250px;
   margin-bottom: 5px;
 }

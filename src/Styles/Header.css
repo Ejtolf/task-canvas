@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   border-style: double;
-  border-color: purple;
+  /* background-color: rgb(167, 205, 205); */
+  background-color: #1976d2;
   border-radius: 10px;
   height: 70px;
   color: white;
   width: 100%;
-  text-shadow: 0 0 10px rgb(0, 0, 255);
 }
 
 .search-panel {
@@ -18,7 +18,7 @@
 .logo {
   margin-right: 10px;
   display: flex;
-  padding: 5px;
+  align-items: center;
 }
 
 .searchfield-container {

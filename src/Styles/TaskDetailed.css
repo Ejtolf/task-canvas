@@ -1,10 +1,10 @@
 .taskDetailed {
-  border: 1px solid purple;
-  color: white;
+  border: 1px solid gray;
+  color: #000033;
   border-radius: 8px;
   max-width: 95%;
   padding: 16px;
-  background-color: #000033;
+  background-color: #e7e7e7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation: AppearanceAnimation 0.5s ease-out forwards;
 }
@@ -12,6 +12,16 @@
 .td-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #000;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.td-header-title {
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .td-general-info {
@@ -19,7 +29,8 @@
 }
 
 .td-date-info {
-  justify-content: flex-start;
+  flex-shrink: 0;
+  text-align: right;
 }
 
 .td-left-info {
@@ -29,46 +40,60 @@
 }
 
 .td-right-info {
-  color: white;
-  float: right;
-  text-wrap: wrap;
-  overflow: scroll;
+  color: #000033;
+  border-style: solid;
+  border-color: gray;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-height: 90%;
+  overflow: auto;
 }
 
 .td-task-description {
   overflow: auto;
   max-height: 125px;
-  background-color: #000025;
+  background-color: #e7e7e7;
 }
 
 .td-title {
-  overflow: auto;
-  max-height: 100px;
-  background-color: #000025;
+  border-bottom: solid 0.5px;
+  border-left: solid 0.5px;
+  border-color: gray;
+  margin: 0;
+  background-color: #e7e7e7;
+  overflow: scroll;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 80%;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .td-par-false {
+  font-size: large;
   text-decoration: line-through;
-  color: white;
+  color: green;
   text-shadow: 0 0 10px lime;
 }
 
 .td-par-true {
-  color: white;
+  font-size: large;
+  color: orangered;
   text-shadow: 0 0 10px orange;
 }
 
 .td-task-completed {
-  color: white;
+  color: green;
   text-shadow: 0 0 10px lime;
 }
 
 .td-task-in-process {
-  color: white;
+  color: orange;
   text-shadow: 0 0 10px yellow;
 }
 
 .td-task-not-completed {
-  color: white;
+  color: orangered;
   text-shadow: 0 0 10px red;
 }

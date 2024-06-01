@@ -10,13 +10,13 @@ export default function Header() {
                 styleOverrides: {
                     root: {
                         '& .MuiInputBase-input': {
-                            color: 'blue',
+                            color: 'white',
                         },
                         '& label': {
-                            color: 'blue',
+                            color: 'white',
                         },
                         '& backgroundColor': {
-                            color: "red"
+                            color: "white"
                         },
                     },
                 },
