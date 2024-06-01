@@ -41,7 +41,8 @@
 
 .td-right-info {
   color: #000033;
-  border-style: solid;
+  border-left: solid 0.5px;
+  padding-left: 2px;
   border-color: gray;
   word-wrap: break-word;
   overflow-wrap: break-word;
