@@ -64,22 +64,22 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                 {tasks && tasks.length > 0 ? <>
                     <div className="quadrant" id="important-urgent">
                         {IMP_URG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
                         ))}
                     </div>
                     <div className="quadrant" id="important-not-urgent">
                         {IMP_nURG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
                         ))}
                     </div>
                     <div className="quadrant" id="not-important-urgent">
                         {nIMP_URG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
                         ))}
                     </div>
                     <div className="quadrant" id="not-important-not-urgent">
                         {nIMP_nURG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.title}</p>
+                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
                         ))}
                     </div>
                 </> : <p>No tasks in database.</p>}

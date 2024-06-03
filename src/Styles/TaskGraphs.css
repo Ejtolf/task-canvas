@@ -1,9 +1,10 @@
 .taskGraphs {
   background-color: white;
+  border-top: 1px gray;
   max-height: 100%;
   overflow: y;
-  background-color: #000033;
-  color: white;
+  background-color: #e7e7e7;
+  color: #000033;
   display: inline list-item;
 }
 
@@ -15,7 +16,7 @@
   /* max-height: 40vh; */
   height: max-content;
   border-style: solid;
-  border-color: purple;
+  border-color: gray;
   /* background-color: #000033; */
 }
 
@@ -39,7 +40,7 @@
 }
 
 .task {
-  background-color: #00000d;
+  background-color: #e7e7e7;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -49,14 +50,17 @@
 
 .todo div:hover {
   text-shadow: 0 0 10px red;
+  transition: text-shadow 0.2s ease-in-out;
 }
 
 .in-process div:hover {
   text-shadow: 0 0 10px orange;
+  transition: text-shadow 0.2s ease-in-out;
 }
 
 .done div:hover {
   text-shadow: 0 0 10px green;
+  transition: text-shadow 0.2s ease-in-out;
 }
 
 .kanban-header-h2-todo {
@@ -140,9 +144,9 @@
 }
 
 .quadrant {
-  background-color: #000033;
+  background-color: rgb(226, 226, 226);
   border-style: solid;
-  box-shadow: 0 0 20px yellow;
+  box-shadow: 0 0 20px #afada8;
   text-align: center;
   overflow: scroll;
   flex-direction: column;
@@ -150,7 +154,7 @@
 }
 
 .em-statistics-part {
-  background-color: black;
+  background-color: #e7e7e7;
   text-align: center;
 }
 
