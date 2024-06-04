@@ -20,21 +20,30 @@ const KanbanGridComponent: React.FC<TaskGraphsProps> = ({ tasks }) => {
                 <h3 className="kanban-header-h2-todo">To Do ({notCompletedTasks?.length})</h3>
                 {/* Rendering tasks marked as 'Not completed' */}
                 {notCompletedTasks?.map(task => (
-                    <div className="task" key={task.id}>{task.id}: {task.title}</div>
+                    <div className="task" key={task.id}>
+                        <span className="task-id">{task.id}:</span>
+                        <span className="task-title">{task.title}</span>
+                    </div>
                 ))}
             </div>
             <div className="column in-process">
                 <h3 className="kanban-header-h2-in-process">In Process ({inProcessTasks?.length})</h3>
                 {/* Rendering tasks marked as 'In process' */}
                 {inProcessTasks?.map(task => (
-                    <div className="task" key={task.id}>{task.id}: {task.title}</div>
+                    <div className="task" key={task.id}>
+                        <span className="task-id">{task.id}:</span>
+                        <span className="task-title">{task.title}</span>
+                    </div>
                 ))}
             </div>
             <div className="column done">
                 <h3 className="kanban-header-h2-done">Done ({completedTasks?.length})</h3>
                 {/* Rendering tasks marked as 'Completed' */}
                 {completedTasks?.map(task => (
-                    <div className="task" key={task.id}>{task.id}: {task.title}</div>
+                    <div className="task" key={task.id}>
+                        <span className="task-id">{task.id}:</span>
+                        <span className="task-title">{task.title}</span>
+                    </div>
                 ))}
             </div>
         </div>

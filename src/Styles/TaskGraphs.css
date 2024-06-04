@@ -39,13 +39,33 @@
   max-height: 40px;
 }
 
+.task-id {
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
 .task {
+  display: flex;
+  margin-bottom: 10px;
   background-color: #e7e7e7;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); */
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: scroll;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 150px;
+}
+
+.task-title {
+  overflow: scroll;
+  border-bottom: 0.5px solid gray;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .todo div:hover {
@@ -141,6 +161,7 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 .quadrant {
@@ -151,6 +172,9 @@
   overflow: scroll;
   flex-direction: column;
   max-height: 100%;
+  overflow-y: auto;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .em-statistics-part {
