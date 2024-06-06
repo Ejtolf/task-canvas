@@ -9,14 +9,15 @@
 }
 
 .kanban-board {
-  max-height: 50vh;
+  /* max-height: 50vh; */
+  height: 50vh;
   display: flex;
   justify-content: space-around;
-  overflow: scroll;
+  /* overflow: scroll; */
   /* max-height: 40vh; */
-  height: max-content;
-  border-style: solid;
-  border-color: gray;
+  /* height: max-content; */
+  /* border-style: solid; */
+  /* border-color: gray; */
   /* background-color: #000033; */
 }
 
@@ -24,6 +25,30 @@
   display: flex;
   justify-content: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.graphs-header-buttons button {
+  flex: 1;
+}
+
+.graphs-header-buttons .inside {
+  color: ghostwhite;
+  background-color: #1976d2;
+}
+
+.graphs-header-buttons .outside {
+  background-color: white;
+  color: #000033;
+}
+
+.graphs-header-buttons .inside:hover {
+  background-color: blue;
+  transition: color 0.2s ease-out;
+}
+
+.graphs-header-buttons .outside:hover {
+  background-color: blue;
+  transition: color 2s ease-out;
 }
 
 .column {
@@ -100,48 +125,6 @@
   color: white;
   text-shadow: 0 0 10px green;
 }
-
-/* .eisenhower-matrix {
-  display: flex;
-  flex-wrap: wrap;
-  height: max-content;
-  width: 100%;
-  display: grid;
-}
-
-.quadrant {
-  flex: 50%;
-  padding: 20px;
-  border: 1px solid #ccc;
-  text-align: center;
-  overflow: scroll;
-  flex-direction: column;
-}
-
-#important-urgent {
-  background-color: #f8d7da;
-}
-#important-not-urgent {
-  background-color: #d1ecf1;
-}
-#not-important-urgent {
-  background-color: #fff3cd;
-}
-#not-important-not-urgent {
-  background-color: #d4edda;
-}
-
-.em-matrix-part {
-  width: 70%;
-  display: contents;
-}
-
-.em-statistics-part {
-  width: 30%;
-  background-color: white;
-} */
-
-/* Eisenhower Matrix CSS */
 
 .eisenhower-matrix {
   display: grid;

@@ -1,7 +1,7 @@
 .informationBlock {
   color: #000033;
   overflow-y: scroll;
-  /* height: 35vh; */
+  height: min-content;
   /* width: 95%; */
   flex: 1;
 }

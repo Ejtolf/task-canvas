@@ -37,8 +37,10 @@
 .tasks-span {
   width: 50%;
   box-sizing: border-box;
+  /* height: 100vh; */
 }
 
 .info-span {
   display: grid;
+  height: 100vh;
 }

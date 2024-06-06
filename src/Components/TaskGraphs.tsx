@@ -121,13 +121,17 @@ const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
         setMode(numberOfMode);
     }
 
+    const checkForInsideOfGraph = (tabNumber: number): string => {
+        return mode == tabNumber ? "inside" : "outside"
+    }
+
     return (
         <div className="taskGraphs">
             {/* <div className="TaskGraphs"> */}
             <div className="graphs-header-buttons">
-                <button className="MatrixMode" onClick={() => handleChangeMode(1)}>Matrix...</button>
-                <button className="KANBANMODE" onClick={() => handleChangeMode(2)}>KANBAN</button>
-                <button className="AnythingSection" onClick={() => handleChangeMode(3)}>Other...</button>
+                <button id="MatrixMode" className={checkForInsideOfGraph(1)} onClick={() => handleChangeMode(1)}>Matrix...</button>
+                <button id="KANBANMODE" className={checkForInsideOfGraph(2)} onClick={() => handleChangeMode(2)}>KANBAN</button>
+                <button id="AnythingSection" className={checkForInsideOfGraph(3)} onClick={() => handleChangeMode(3)}>Other...</button>
             </div>
             <div>{(() => {
                 switch (mode) {
