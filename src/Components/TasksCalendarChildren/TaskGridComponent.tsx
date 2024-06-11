@@ -1,6 +1,18 @@
 import React, { SetStateAction, useState } from 'react';
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
 import TaskDetailed from '../TaskDetailed';
+import { saveAs } from "file-saver";
+
+// Material UI
+import { Button } from '@mui/material';
+import IconButton from "@mui/material/IconButton";
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import "../../Styles/TasksCalendar.css";
 
@@ -45,17 +57,35 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => 
         }
     };
 
+    const handleSaveTasks = () => {
+        const tasksJSON = JSON.stringify(tasks);
+
+        if (tasks?.length === 0) {
+            alert("The list of tasks is empty.");
+        } else {
+            const blob = new Blob([tasksJSON], { type: "application/json" });
+            saveAs(blob, "tasks.json");
+        }
+    };
+
+
     return (
-        <div className="tasksCalendar">
-            <div className="tasks-grid">
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    // @ts-ignore
-                    onRowClick={handleRowClick}
-                />
+        <>
+            <Button onClick={handleSaveTasks} variant="outlined" startIcon={<FileDownloadOutlinedIcon />}>
+                Save
+            </Button>
+
+            <div className="tasksCalendar">
+                <div className="tasks-grid">
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        // @ts-ignore
+                        onRowClick={handleRowClick}
+                    />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
