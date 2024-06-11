@@ -1,8 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, FormControlLabel, Checkbox } from '@mui/material';
 import IsTaskPreparingContext from '../../Context/contexts';
 import TaskGridComponent from './TaskGridComponent';
 import TasksCalendar from '../TasksCalendar';
+
+// Material UI
+import { Button, FormControlLabel, Checkbox } from '@mui/material';
+import IconButton from "@mui/material/IconButton";
+import CheckIcon from '@mui/icons-material/Check';
+import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 
 import "../../Styles/TasksCalendar.css";
 
@@ -57,12 +62,31 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
 
     return (
         <div className="new-task-form">
-            <h1 className="new-task-title">New Task</h1>
+            <h3 className="new-task-title">New Task</h3>
             <hr />
             <div className="new-task-span-head">
                 <div className="left-section">
                     <input className="task-title-input" value={taskTitle} type="text" placeholder="Task title" onChange={(e) => setTaskTitle(e.target.value)} />
                 </div>
+
+                <IconButton onClick={() => {
+                    if (taskTitle.trim() === "" && description.trim() === "") {
+                        alert("No fields was filled.");
+                    } else if (taskTitle.trim() === "") {
+                        alert("Task title must be filled.");
+                    } else {
+                        handleAddTaskToTableGrid();
+                    }
+                }} aria-label="check" size="medium">
+                    <CheckIcon fontSize="inherit" />
+                </IconButton>
+
+                <IconButton onClick={() => {
+                    handleClearAllFields();
+                }} aria-label="edit" size="medium">
+                    <EditOffOutlinedIcon fontSize="inherit" />
+                </IconButton>
+
                 <div className="right-section">
                     <div className="deadline-label">deadline time:</div>
                     <input className="deadline-input" value="date" type="date" onChange={(e) => {
@@ -83,18 +107,6 @@ In the task table, you will only see the title; when you open it, you will be ab
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" onChange={() => setIsUrgently(!isUrgently)} />
             </div>
             <span className="new-task-buttons-span">
-                <Button variant="contained" onClick={() => {
-                    if (taskTitle.trim() === "" && description.trim() === "") {
-                        alert("No fields was filled.");
-                    } else if (taskTitle.trim() === "") {
-                        alert("Task title must be filled.");
-                    } else {
-                        handleAddTaskToTableGrid();
-                    }
-                }}>Add to datagrid</Button>
-                <Button variant="contained" onClick={() => {
-                    handleClearAllFields();
-                }}>Clear</Button>
             </span>
         </div>
     )

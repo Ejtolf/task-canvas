@@ -73,7 +73,11 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                 {tasks && tasks.length > 0 ? <>
                     <div className="quadrant" id="important-urgent">
                         {IMP_URG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
+                            // <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
+                            <div className="task" key={task.id}>
+                                <span className="task-id">{task.id}:</span>
+                                <span className="task-title">{task.title}</span>
+                            </div>
                         ))}
                     </div>
                     <div className="quadrant" id="important-not-urgent">
