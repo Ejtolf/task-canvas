@@ -33,6 +33,8 @@ interface TaskListProps {
 }
 
 const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => {
+    // const [open, setOpen] = React.useState(true); // For dialog
+
     const columns: GridColDef[] = [
         { field: 'id', headerName: '№', width: 70 },
         { field: 'title', headerName: 'Task title', width: 90 },
@@ -63,11 +65,11 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => 
         if (tasks?.length === 0) {
             alert("The list of tasks is empty.");
         } else {
+            let listname = prompt("Please enter your list of tasks name", "TaskCanvas List");
             const blob = new Blob([tasksJSON], { type: "application/json" });
-            saveAs(blob, "tasks.json");
+            saveAs(blob, `${listname}.json` || "TaskCanvas List.json");
         }
     };
-
 
     return (
         <>
