@@ -5,14 +5,8 @@ import { saveAs } from "file-saver";
 
 // Material UI
 import { Button } from '@mui/material';
-import IconButton from "@mui/material/IconButton";
+import UploadOutlinedIcon from '@mui/icons-material/UploadOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 import "../../Styles/TasksCalendar.css";
 
@@ -33,8 +27,6 @@ interface TaskListProps {
 }
 
 const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => {
-    // const [open, setOpen] = React.useState(true); // For dialog
-
     const columns: GridColDef[] = [
         { field: 'id', headerName: '№', width: 70 },
         { field: 'title', headerName: 'Task title', width: 90 },
@@ -71,10 +63,17 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => 
         }
     };
 
+    const handleLoadTasks = () => {
+        console.log("Load the tasks.");
+    }
+
     return (
         <>
-            <Button onClick={handleSaveTasks} variant="outlined" startIcon={<FileDownloadOutlinedIcon />}>
+            <Button onClick={handleSaveTasks} variant="outlined" startIcon={<UploadOutlinedIcon />}>
                 Save
+            </Button>
+            <Button onClick={handleLoadTasks} variant="outlined" startIcon={<FileDownloadOutlinedIcon />}>
+                Load
             </Button>
 
             <div className="tasksCalendar">
