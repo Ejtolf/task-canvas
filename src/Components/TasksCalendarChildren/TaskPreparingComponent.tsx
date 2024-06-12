@@ -66,34 +66,38 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
             <hr />
             <div className="new-task-span-head">
                 <div className="left-section">
-                    <input className="task-title-input" value={taskTitle} type="text" placeholder="Task title" onChange={(e) => setTaskTitle(e.target.value)} />
+                    <span>
+                        <input className="task-title-input" value={taskTitle} type="text" placeholder="Task title" onChange={(e) => setTaskTitle(e.target.value)} />
+                    </span>
+
+                    <span style={{ marginLeft: "15px" }}>
+                        <Button onClick={() => {
+                            if (taskTitle.trim() === "" && description.trim() === "") {
+                                alert("No fields was filled.");
+                            } else if (taskTitle.trim() === "") {
+                                alert("Task title must be filled.");
+                            } else {
+                                handleAddTaskToTableGrid();
+                            }
+                        }} variant="outlined" startIcon={<CheckIcon />}>
+                            Save
+                        </Button>
+
+                        <Button onClick={() => {
+                            handleClearAllFields();
+                        }} variant="outlined" startIcon={<EditOffOutlinedIcon />}>
+                            Clear
+                        </Button>
+                    </span>
                 </div>
 
-                <IconButton onClick={() => {
-                    if (taskTitle.trim() === "" && description.trim() === "") {
-                        alert("No fields was filled.");
-                    } else if (taskTitle.trim() === "") {
-                        alert("Task title must be filled.");
-                    } else {
-                        handleAddTaskToTableGrid();
-                    }
-                }} aria-label="check" size="medium">
-                    <CheckIcon fontSize="inherit" />
-                </IconButton>
-
-                <IconButton onClick={() => {
-                    handleClearAllFields();
-                }} aria-label="edit" size="medium">
-                    <EditOffOutlinedIcon fontSize="inherit" />
-                </IconButton>
-
-                <div className="right-section">
+                {/* <div className="right-section">
                     <div className="deadline-label">deadline time:</div>
                     <input className="deadline-input" value="date" type="date" onChange={(e) => {
                         const newDate = e.target.value;
                         setDeadlineTime(newDate);
                     }} />
-                </div>
+                </div> */}
             </div>
             <hr />
             <div>
@@ -103,8 +107,17 @@ In the task table, you will only see the title; when you open it, you will be ab
 - If necessary, format the text, making it *bold*, _italic_, ~underlined~, or !highlighted!." onChange={(e) => setDescription(e.target.value)} />
             </div>
             <div className="new-task-notes">
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Important" onChange={() => setIsImportant(!isImportant)} />
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" onChange={() => setIsUrgently(!isUrgently)} />
+                <div>
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Important" onChange={() => setIsImportant(!isImportant)} />
+                    <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" onChange={() => setIsUrgently(!isUrgently)} />
+                </div>
+                <div>
+                    <div className="deadline-label">deadline time:</div>
+                    <input className="deadline-input" value={deadlineTime} type="date" onChange={(e) => {
+                        const newDate = e.target.value;
+                        setDeadlineTime(newDate);
+                    }} />
+                </div>
             </div>
             <span className="new-task-buttons-span">
             </span>
