@@ -5,6 +5,8 @@ import { saveAs } from "file-saver";
 
 // Material UI
 import { Button } from '@mui/material';
+
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import UploadOutlinedIcon from '@mui/icons-material/UploadOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
@@ -51,31 +53,8 @@ const TaskGridComponent: React.FC<TaskListProps> = ({ tasks, onTaskChoice }) => 
         }
     };
 
-    const handleSaveTasks = () => {
-        const tasksJSON = JSON.stringify(tasks);
-
-        if (tasks?.length === 0) {
-            alert("The list of tasks is empty.");
-        } else {
-            let listname = prompt("Please enter your list of tasks name", "TaskCanvas List");
-            const blob = new Blob([tasksJSON], { type: "application/json" });
-            saveAs(blob, `${listname}.json` || "TaskCanvas List.json");
-        }
-    };
-
-    const handleLoadTasks = () => {
-        console.log("Load the tasks.");
-    }
-
     return (
         <>
-            <Button onClick={handleSaveTasks} variant="outlined" startIcon={<UploadOutlinedIcon />}>
-                Save
-            </Button>
-            <Button onClick={handleLoadTasks} variant="outlined" startIcon={<FileDownloadOutlinedIcon />}>
-                Load
-            </Button>
-
             <div className="tasksCalendar">
                 <div className="tasks-grid">
                     <DataGrid

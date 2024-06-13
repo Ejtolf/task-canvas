@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import IsTaskPreparingContext from '../../Context/contexts';
+import React, { useState } from 'react';
 import TaskGridComponent from './TaskGridComponent';
 import TasksCalendar from '../TasksCalendar';
 
@@ -24,11 +23,12 @@ interface Task {
 
 interface TaskPreparingComponentProps {
     onTaskAdd: (newTask: Task) => void;
+    isTaskPreparing: boolean;
 }
 
 let id = 0;
 const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskAdd }) => {
-    const { setIsTaskPreparing } = useContext(IsTaskPreparingContext);
+    const [isTaskPreparing, setIsTaskPreparing] = useState<boolean>(true);
     const [taskTitle, setTaskTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadlineTime, setDeadlineTime] = useState<string>("");
@@ -48,7 +48,7 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
             isCompleted: "Not completed"
         };
 
-        onTaskAdd(newTask)
+        onTaskAdd(newTask);
         setIsTaskPreparing(false);
     }
 
