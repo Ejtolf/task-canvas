@@ -1,14 +1,5 @@
 import React, { SetStateAction, useState } from 'react';
 import { DataGrid, GridColDef, GridRowId } from '@mui/x-data-grid';
-import TaskDetailed from '../TaskDetailed';
-import { saveAs } from "file-saver";
-
-// Material UI
-import { Button } from '@mui/material';
-
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import UploadOutlinedIcon from '@mui/icons-material/UploadOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 import "../../Styles/TasksCalendar.css";
 

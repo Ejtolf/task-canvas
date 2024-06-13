@@ -9,9 +9,13 @@
   width: 100%;
 }
 
-.search-panel {
-  display: flex;
-  align-items: center;
+.header h1 {
+  width: 29ch;
+  font-family: monospace;
+  font-size: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: textIsTyping 5s steps(29);
 }
 
 .logo {
@@ -20,6 +24,8 @@
   align-items: center;
 }
 
-.searchfield-container {
-  flex: 1;
+@keyframes textIsTyping {
+  20% {
+    width: 0;
+  }
 }

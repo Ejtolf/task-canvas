@@ -17,7 +17,7 @@
 
 .Header {
   width: 100%;
-  animation: hasBeenAppeared 0.4s ease-in forwards;
+  animation: hasBeenAppeared 0.3s ease-in forwards;
 }
 
 .content-inside {
