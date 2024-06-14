@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Task from "./Task";
 import CompletedStatuses from "./CompletedStatuses";
 
+// To make the plot with VICTORY library.
+import { VictoryPie, VictoryLabel } from "victory";
+
 import "../Styles/TaskGraphs.css";
 
 interface TaskGraphsProps {
@@ -73,8 +76,7 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                 {tasks && tasks.length > 0 ? <>
                     <div className="quadrant" id="important-urgent">
                         {IMP_URG?.map((task, id) => (
-                            // <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
-                            <div className="task" key={task.id}>
+                            <div className="em-task" key={task.id}>
                                 <span className="task-id">{task.id}:</span>
                                 <span className="task-title">{task.title}</span>
                             </div>
@@ -82,17 +84,26 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                     </div>
                     <div className="quadrant" id="important-not-urgent">
                         {IMP_nURG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
+                            <div className="em-task" key={task.id}>
+                                <span className="task-id">{task.id}:</span>
+                                <span className="task-title">{task.title}</span>
+                            </div>
                         ))}
                     </div>
                     <div className="quadrant" id="not-important-urgent">
                         {nIMP_URG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
+                            <div className="em-task" key={task.id}>
+                                <span className="task-id">{task.id}:</span>
+                                <span className="task-title">{task.title}</span>
+                            </div>
                         ))}
                     </div>
                     <div className="quadrant" id="not-important-not-urgent">
                         {nIMP_nURG?.map((task, id) => (
-                            <p className="task-list-for-matrix" key={id}>{task.id}: {task.title}</p>
+                            <div className="task" key={task.id}>
+                                <span className="task-id">{task.id}:</span>
+                                <span className="task-title">{task.title}</span>
+                            </div>
                         ))}
                     </div>
                 </> : <p>No tasks in database.</p>}
@@ -113,9 +124,9 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
     );
 }
 
-//TODO: Ещё не придумано.
-const AnotherOneMatrix: React.FC = () => {
-    return <h1>???</h1>
+//TODO: График.
+const Plot: React.FC<TaskGraphsProps> = ({ tasks }) => {
+    return <></>
 }
 
 const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
@@ -133,9 +144,9 @@ const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
         <div className="taskGraphs">
             {/* <div className="TaskGraphs"> */}
             <div className="graphs-header-buttons">
-                <button id="MatrixMode" className={checkForInsideOfGraph(1)} onClick={() => handleChangeMode(1)}>Matrix...</button>
-                <button id="KANBANMODE" className={checkForInsideOfGraph(2)} onClick={() => handleChangeMode(2)}>KANBAN</button>
-                <button id="AnythingSection" className={checkForInsideOfGraph(3)} onClick={() => handleChangeMode(3)}>Other...</button>
+                <button id="matrix-mode" className={checkForInsideOfGraph(1)} onClick={() => handleChangeMode(1)}>EisenhowersMatrix</button>
+                <button id="kanban-mode" className={checkForInsideOfGraph(2)} onClick={() => handleChangeMode(2)}>Kanban board</button>
+                <button id="plot-mode" className={checkForInsideOfGraph(3)} onClick={() => handleChangeMode(3)}>Plot</button>
             </div>
             <div>{(() => {
                 switch (mode) {
@@ -144,7 +155,7 @@ const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
                     case 2:
                         return <KanbanGridComponent tasks={tasks} />
                     default:
-                        return <AnotherOneMatrix />
+                        return <Plot />
                 }
             })()}</div>
         </div>

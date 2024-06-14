@@ -39,6 +39,17 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskS
         );
     }
 
+    const formatDate = (dateString: string): string => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        const hours = ('0' + date.getHours()).slice(-2);
+        const minutes = ('0' + date.getMinutes()).slice(-2);
+
+        return `${year}-${month}-${day}, ${hours}:${minutes}`;
+    };
+
     return (
         <div className="taskDetailed">
             <div className="td-header">
@@ -47,7 +58,7 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskS
                 </div>
                 <div className="td-date-info">
                     <p>Created:</p>
-                    <p>{String(task.generationTime?.getHours())}:{String(task.generationTime?.getMinutes())}, {String(task.generationTime?.getDate())}.{String(task.generationTime?.getMonth())}</p>
+                    <p>{formatDate(String(task.generationTime))}</p>
                     <p>Deadline: {task.deadline || "-"}</p>
                 </div>
             </div>

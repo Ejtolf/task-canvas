@@ -84,6 +84,20 @@
   width: 150px;
 }
 
+.em-task {
+  display: flex;
+  margin-bottom: 10px;
+  background-color: #e7e7e7;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  /* box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: scroll;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .task-title {
   overflow: scroll;
   border-bottom: 0.5px solid gray;
