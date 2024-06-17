@@ -3,7 +3,6 @@ import Task from "./Task";
 import CompletedStatuses from "./CompletedStatuses";
 
 // To make the plot with VICTORY library.
-import { VictoryPie, VictoryLabel } from "victory";
 
 import "../Styles/TaskGraphs.css";
 
