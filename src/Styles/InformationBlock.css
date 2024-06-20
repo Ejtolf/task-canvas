@@ -47,3 +47,13 @@
   width: 250px;
   margin-bottom: 5px;
 }
+
+.all-tasks-done-text {
+  animation: AllTasksHasBeenAppeared 0.5s ease-in forwards;
+}
+
+@keyframes AllTasksDoneHasBeenAppeared {
+  from {
+    text-shadow: 0 0 10px green;
+  }
+}

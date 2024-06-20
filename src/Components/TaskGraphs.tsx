@@ -123,11 +123,6 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
     );
 }
 
-//TODO: График.
-const Plot: React.FC<TaskGraphsProps> = ({ tasks }) => {
-    return <></>
-}
-
 const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
     const [mode, setMode] = React.useState<number>(1);
 
@@ -145,7 +140,6 @@ const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
             <div className="graphs-header-buttons">
                 <button id="matrix-mode" className={checkForInsideOfGraph(1)} onClick={() => handleChangeMode(1)}>EisenhowersMatrix</button>
                 <button id="kanban-mode" className={checkForInsideOfGraph(2)} onClick={() => handleChangeMode(2)}>Kanban board</button>
-                <button id="plot-mode" className={checkForInsideOfGraph(3)} onClick={() => handleChangeMode(3)}>Plot</button>
             </div>
             <div>{(() => {
                 switch (mode) {
@@ -153,8 +147,6 @@ const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
                         return <EisenhowersMatrix tasks={tasks} />
                     case 2:
                         return <KanbanGridComponent tasks={tasks} />
-                    default:
-                        return <Plot />
                 }
             })()}</div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Task from "./Task";
+import CompletedStatuses from "./CompletedStatuses";
 
 import "../Styles/InformationBlock.css";
 
@@ -28,16 +29,21 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
         return () => clearInterval(interval);
     }, []);
 
+    const numberOfTasksLeft = () => {
+        // List of undone tasks.
+        return tasks?.filter((task) => task.isCompleted === CompletedStatuses[0] || task.isCompleted === CompletedStatuses[1]);
+    }
+
     return (
         <div className="informationBlock">
             <div className="left-column">
                 <p className="information-panel-text">Tasks: {tasks?.length}</p>
                 <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
                 <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
-                <p className="information-panel-text">{
-                    (tasks?.length == 0) ?
+                <p className={numberOfTasksLeft()?.length == 0 ? "all-tasks-done-text information-panel-text" : "information-panel-text"}>{
+                    (numberOfTasksLeft()?.length == 0) ?
                         "All tasks done." :
-                        `Tasks left: ${tasks?.length}`
+                        `Tasks left: ${numberOfTasksLeft()?.length}`
                 }</p>
             </div>
             <div className="right-column">
