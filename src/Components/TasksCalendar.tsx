@@ -58,23 +58,28 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
 
     const handleSaveTasks = () => {
         if (isTasksSaved) {
-            if (window.confirm("TASKS ALREADY SAVED. Would you like to save them again?")) {
-                const tasksJSON = JSON.stringify(tasks);
-
-                if (tasks?.length === 0) {
-                    alert("The list of tasks is empty.");
-                } else {
-                    let listname = prompt("Please enter your list of tasks name", "TaskCanvas List");
-
-                    if (listname !== null) {
-                        const blob = new Blob([tasksJSON], { type: "application/json" });
-                        saveAs(blob, `${listname}.json`);
-
-                        setIsTasksSaved(true);
-                    }
-                }
+            const shouldSaveAgain = window.confirm("TASKS ALREADY SAVED. Would you like to save them again?");
+            if (!shouldSaveAgain) {
+                return;
             }
         }
+
+        if (tasks.length === 0) {
+            alert("The list of tasks is empty.");
+            return;
+        }
+
+        const listName = prompt("Please enter your list of tasks name", "TaskCanvas List");
+        if (listName === null || listName.trim() === "") {
+            alert("List name cannot be empty.");
+            return;
+        }
+
+        const tasksJSON = JSON.stringify(tasks);
+        const blob = new Blob([tasksJSON], { type: "application/json" });
+        saveAs(blob, `${listName.trim()}.json`);
+
+        setIsTasksSaved(true);
     };
 
     const handleLoadTasks = () => {

@@ -50,7 +50,7 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
                 <p className="information-panel-text">Time: {currentTime.toLocaleTimeString()}</p>
                 <p className="information-panel-text">Date: The {currentDay} of {currentMonth}</p>
             </div>
-        </div >
+        </div>
     );
 }
 
