@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Snackbar, Alert } from '@mui/material';
 import Status from "./CompletedStatuses";
 import Task from "./Task";
 import "../Styles/TaskDetailed.css";
@@ -11,12 +12,20 @@ interface TaskDetailedProps {
 
 const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskStatus }) => {
     const [currentStatus, setCurrentStatus] = useState<string>(task?.isCompleted || "");
+    const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+    const [snackbarMessage, setSnackbarMessage] = useState<string>("");
 
     const handleStatusChange = (newStatus: string) => {
         if (taskId !== undefined) {
             onUpdateTaskStatus(taskId, newStatus);
             setCurrentStatus(newStatus);
+            setSnackbarMessage(`Task status has been changed to: ${newStatus}`);
+            setOpenSnackbar(true);
         }
+    };
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
 
     const checkTaskParameters = (parameter: boolean) => parameter ? "td-par td-par-true" : "td-par td-par-false";
@@ -27,9 +36,9 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskS
         } else if (task?.isCompleted === Status[1]) {
             return "td-par-completed td-task-in-process";
         } else {
-            return "td-par-completed td-task-not-completed"
+            return "td-par-completed td-task-not-completed";
         }
-    }
+    };
 
     if (!task) {
         return (
@@ -42,12 +51,12 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskS
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const year = date.getFullYear();
-        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const month = date.toLocaleString('default', { month: 'short' });
         const day = ('0' + date.getDate()).slice(-2);
         const hours = ('0' + date.getHours()).slice(-2);
         const minutes = ('0' + date.getMinutes()).slice(-2);
 
-        return `${year}-${month}-${day}, ${hours}:${minutes}`;
+        return `${day} ${month} ${year}, ${hours}:${minutes}`;
     };
 
     return (
@@ -69,19 +78,32 @@ const TaskDetailed: React.FC<TaskDetailedProps> = ({ task, taskId, onUpdateTaskS
                     <p className={checkTaskParameters(task.isUrgently)}>Urgently</p>
                     <hr />
                     <p className="td-status">
-                        <select value={currentStatus} onChange={(e) => handleStatusChange(e.target.value)}>
+                        <div className="status-buttons">
                             {Object.values(Status).map((status) => (
-                                <option value={status}>
+                                <button
+                                    key={status}
+                                    className={`status-button ${currentStatus === status ? 'active' : ''}`}
+                                    onClick={() => handleStatusChange(status)}
+                                >
                                     {status}
-                                </option>
+                                </button>
                             ))}
-                        </select>
+                        </div>
                     </p>
                 </div>
                 <div className="td-right-info">
                     <p className="td-task-description">{task.description || "No description available."}</p>
                 </div>
             </div>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+            >
+                <Alert onClose={handleCloseSnackbar} severity="info" sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </div>
     );
 };

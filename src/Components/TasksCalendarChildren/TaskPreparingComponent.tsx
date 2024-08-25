@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import TaskGridComponent from './TaskGridComponent';
-import TasksCalendar from '../TasksCalendar';
-
-// Material UI
 import { Button, FormControlLabel, Checkbox } from '@mui/material';
 import IconButton from "@mui/material/IconButton";
+import { Snackbar, Alert } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 
@@ -27,8 +24,8 @@ interface TaskPreparingComponentProps {
 }
 
 let id = 0;
-const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskAdd }) => {
-    const [isTaskPreparing, setIsTaskPreparing] = useState<boolean>(true);
+const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskAdd, isTaskPreparing }) => {
+    const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
     const [taskTitle, setTaskTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadlineTime, setDeadlineTime] = useState<string>("");
@@ -48,17 +45,18 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
             isCompleted: "Not completed"
         };
 
+        setOpenSnackbar(true);
         onTaskAdd(newTask);
-        setIsTaskPreparing(false);
-    }
-
-    const handleClearAllFields = () => {
         setTaskTitle("");
         setDescription("");
         setDeadlineTime("");
         setIsImportant(true);
         setIsUrgently(true);
     }
+
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
+    };
 
     return (
         <div className="new-task-form">
@@ -73,7 +71,7 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
                     <span style={{ marginLeft: "15px" }}>
                         <Button onClick={() => {
                             if (taskTitle.trim() === "" && description.trim() === "") {
-                                alert("No fields was filled.");
+                                alert("No fields were filled.");
                             } else if (taskTitle.trim() === "") {
                                 alert("Task title must be filled.");
                             } else {
@@ -84,45 +82,42 @@ const TaskPreparingComponent: React.FC<TaskPreparingComponentProps> = ({ onTaskA
                         </Button>
 
                         <Button onClick={() => {
-                            handleClearAllFields();
+                            setTaskTitle("");
+                            setDescription("");
+                            setDeadlineTime("");
+                            setIsImportant(true);
+                            setIsUrgently(true);
                         }} variant="outlined" startIcon={<EditOffOutlinedIcon />}>
                             Clear
                         </Button>
                     </span>
                 </div>
-
-                {/* <div className="right-section">
-                    <div className="deadline-label">deadline time:</div>
-                    <input className="deadline-input" value="date" type="date" onChange={(e) => {
-                        const newDate = e.target.value;
-                        setDeadlineTime(newDate);
-                    }} />
-                </div> */}
             </div>
             <hr />
             <div>
-                <textarea value={description} className="task-description-input" placeholder="Task description and detailed information.
-In the task table, you will only see the title; when you open it, you will be able to see this description, so:
-- Enter the necessary details here, follow the text format;
-- If necessary, format the text, making it *bold*, _italic_, ~underlined~, or !highlighted!." onChange={(e) => setDescription(e.target.value)} />
+                <textarea value={description} className="task-description-input" placeholder="Task description and detailed information." onChange={(e) => setDescription(e.target.value)} />
             </div>
             <div className="new-task-notes">
                 <div>
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Important" onChange={() => setIsImportant(!isImportant)} />
-                    <FormControlLabel control={<Checkbox defaultChecked />} label="Urgently" onChange={() => setIsUrgently(!isUrgently)} />
+                    <FormControlLabel control={<Checkbox checked={isImportant} />} label="Important" onChange={() => setIsImportant(!isImportant)} />
+                    <FormControlLabel control={<Checkbox checked={isUrgently} />} label="Urgently" onChange={() => setIsUrgently(!isUrgently)} />
                 </div>
                 <div>
-                    <div className="deadline-label">deadline time:</div>
-                    <input className="deadline-input" value={deadlineTime} type="date" onChange={(e) => {
-                        const newDate = e.target.value;
-                        setDeadlineTime(newDate);
-                    }} />
+                    <div className="deadline-label">Deadline time:</div>
+                    <input className="deadline-input" value={deadlineTime} type="date" onChange={(e) => setDeadlineTime(e.target.value)} />
                 </div>
             </div>
-            <span className="new-task-buttons-span">
-            </span>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+            >
+                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                    {"New task has been added!"}
+                </Alert>
+            </Snackbar>
         </div>
-    )
+    );
 };
 
 export default TaskPreparingComponent;

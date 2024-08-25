@@ -1,5 +1,6 @@
 .tasksCalendar {
   border-style: double;
+  border-top: none;
   border-color: #c5cfda;
   color: white;
   overflow-y: scroll;
