@@ -22,9 +22,12 @@ interface TasksCalendarProps {
 const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
     const [isPreparingComponentOpen, setIsPreparingComponentOpen] = useState<boolean>(false);
 
-    const [tasks, setInternalTasks] = useState<Task[]>([]);
+    const [tasks, setInternalTasks] = useState<Task[]>(() => {
+        const savedTasks = localStorage.getItem("tasks");
+        return savedTasks ? JSON.parse(savedTasks) : [];
+    });
     const [chosenTaskId, setChosenTaskId] = useState<number | undefined>(undefined);
-    const [isTasksSaved, setIsTasksSaved] = useState<boolean>(false);
+    const [isTasksSaved, setIsTasksSaved] = useState<boolean>(!!localStorage.getItem("tasks"));
 
     const handleUpdateTaskStatus = (taskId: number, newStatus: string) => {
         setInternalTasks((oldTasks) =>
@@ -50,6 +53,7 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
 
     useEffect(() => {
         setTasks(tasks);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks, setTasks]);
 
     const handleChangeComponent = () => {
