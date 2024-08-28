@@ -12,6 +12,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import UploadOutlinedIcon from '@mui/icons-material/UploadOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import CheckBoxBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
 
 import '../Styles/TasksCalendar.css';
 
@@ -22,12 +23,13 @@ interface TasksCalendarProps {
 const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
     const [isPreparingComponentOpen, setIsPreparingComponentOpen] = useState<boolean>(false);
 
+    // Local storage initialization.
     const [tasks, setInternalTasks] = useState<Task[]>(() => {
         const savedTasks = localStorage.getItem("tasks");
         return savedTasks ? JSON.parse(savedTasks) : [];
     });
     const [chosenTaskId, setChosenTaskId] = useState<number | undefined>(undefined);
-    const [isTasksSaved, setIsTasksSaved] = useState<boolean>(!!localStorage.getItem("tasks"));
+    const [isTasksSaved, setIsTasksSaved] = useState<boolean>(false);
 
     const handleUpdateTaskStatus = (taskId: number, newStatus: string) => {
         setInternalTasks((oldTasks) =>
@@ -121,6 +123,23 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
         handleSelectAndLoad()
     }
 
+    const addBlankList = () => {
+        const addBlank = () => {
+            setInternalTasks([]);
+        }
+    
+        if (!isTasksSaved && tasks.length !== 0) {
+            if (window.confirm("TASKS ARE NOT SAVED! Would you like to save them?")) {
+                handleSaveTasks();
+            } else {
+                addBlank();
+            }
+        } else {
+            addBlank();
+        }
+    }
+    
+
     const startIconForAddTask = isPreparingComponentOpen ? <DisabledByDefaultIcon /> : <AddBoxIcon />;
 
     return (
@@ -136,6 +155,7 @@ const TasksCalendar: React.FC<TasksCalendarProps> = ({ setTasks }) => {
                     <Button onClick={handleLoadTasks} variant="outlined" startIcon={<FileDownloadOutlinedIcon />}>
                         Load
                     </Button>
+                    <Button onClick={addBlankList} variant="outlined" startIcon={<CheckBoxBlankOutlinedIcon />}>Blank</Button>
                 </span>
                 <span>
                     <p style={{ color: isTasksSaved ? "green" : "red", marginRight: "25px" }}>
