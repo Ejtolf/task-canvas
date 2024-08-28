@@ -1,7 +1,5 @@
 .tasksCalendar {
-  border-style: double;
-  border-top: none;
-  border-color: #c5cfda;
+  border: none;
   color: white;
   overflow-y: scroll;
   height: 45vh;
@@ -16,7 +14,7 @@
 .MuiDataGrid-root {
   background-color: #e7e7e7;
   backdrop-filter: blur(40);
-  border-style: none;
+  border: none;
 }
 
 .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
@@ -25,7 +23,7 @@
 
 .MuiDataGrid-cell {
   color: #000033;
-  text-shadow: 0 0 0.5px #c5cfda;
+  text-shadow: none;
 }
 
 .MuiToolbar-gutters,
@@ -40,7 +38,7 @@
 
 .MuiDataGrid-columnHeaderTitle {
   color: #000033 !important;
-  text-shadow: 0 0 5px #c5cfda;
+  text-shadow: none;
 }
 
 .PrivateSwitchBase-input {
@@ -48,8 +46,7 @@
 }
 
 .new-task-form {
-  border-style: solid;
-  border-color: #c5cfda;
+  border: none;
   color: white;
   backdrop-filter: blur(2.4px);
   height: 45vh;
@@ -70,7 +67,7 @@
 .form-input {
   background-color: #000033;
   color: white;
-  text-shadow: 0 0 5px cyan;
+  text-shadow: none;
   font-size: 15px;
   float: right;
   margin-right: 10%;
@@ -79,7 +76,6 @@
 .new-task-buttons-span {
   display: flex;
   justify-content: center;
-  /* margin-top: 20%; */
 }
 
 .task-title-input {
@@ -100,7 +96,6 @@
   display: flex;
   max-height: 60px;
   margin-right: 10px;
-  /* flex: 1; */
 }
 
 .title-input {
@@ -109,7 +104,6 @@
   max-height: 40px;
   padding: 8px;
   font-size: 18px;
-  /* max-width: 60px; */
 }
 
 .right-section {
@@ -138,7 +132,6 @@
   height: 150px;
   justify-self: center;
   contain-intrinsic-height: 140px;
-  border: none;
   background-color: #c5cfda;
   color: #000033;
   border-radius: 8px;
@@ -150,7 +143,6 @@
 .task-description-input,
 .deadline-input,
 .task-title-input {
-  border: none;
   background-color: #c5cfda;
   color: #000033;
   border-radius: 8px;

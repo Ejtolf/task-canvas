@@ -2,16 +2,7 @@ import React, { useState, PureComponent } from "react";
 import CompletedStatuses from "./CompletedStatuses";
 import Task from "./Task";
 
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer
-} from 'recharts';
+import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 
 import "../Styles/TaskGraphs.css";
 
@@ -84,7 +75,7 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                 {tasks && tasks.length > 0 ? <>
                     <div className="quadrant" id="important-urgent">
                         {IMP_URG?.map((task, id) => (
-                            <div className="em-task" key={task.id}>
+                            <div className="task" key={task.id}>
                                 <span className="task-id">{task.id}:</span>
                                 <span className="task-title">{task.title}</span>
                             </div>
@@ -92,7 +83,7 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                     </div>
                     <div className="quadrant" id="important-not-urgent">
                         {IMP_nURG?.map((task, id) => (
-                            <div className="em-task" key={task.id}>
+                            <div className="task" key={task.id}>
                                 <span className="task-id">{task.id}:</span>
                                 <span className="task-title">{task.title}</span>
                             </div>
@@ -100,7 +91,7 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
                     </div>
                     <div className="quadrant" id="not-important-urgent">
                         {nIMP_URG?.map((task, id) => (
-                            <div className="em-task" key={task.id}>
+                            <div className="task" key={task.id}>
                                 <span className="task-id">{task.id}:</span>
                                 <span className="task-title">{task.title}</span>
                             </div>
@@ -133,54 +124,50 @@ const EisenhowersMatrix: React.FC<TaskGraphsProps> = ({ tasks }) => {
 }
 
 const Plots: React.FC<TaskGraphsProps> = ({ tasks }) => {
-    if (tasks) {
-        const aggregatedData = tasks.reduce((acc: Record<string, any>, task) => {
-            if (task.generationTime) {
-                const date = new Date(task.generationTime).toLocaleDateString();
-                if (!acc[date]) {
-                    acc[date] = { important: 0, urgent: 0, importantUrgent: 0, regular: 0 };
-                }
-                if (task.isImportant && task.isUrgently) {
-                    acc[date].importantUrgent += 1;
-                } else if (task.isImportant) {
-                    acc[date].important += 1;
-                } else if (task.isUrgently) {
-                    acc[date].urgent += 1;
-                } else {
-                    acc[date].regular += 1;
-                }
-            }
-            return acc;
-        }, {});
+    if (!tasks) return <></>;
 
-        const chartData = Object.keys(aggregatedData).map(date => ({
-            date,
-            important: aggregatedData[date].important,
-            urgent: aggregatedData[date].urgent,
-            importantUrgent: aggregatedData[date].importantUrgent,
-            regular: aggregatedData[date].regular,
-        }));
+    const aggregatedData = tasks.reduce((acc: Record<string, number>, task) => {
+        if (task.isImportant && task.isUrgently) {
+            acc['Important & Urgent'] = (acc['Important & Urgent'] || 0) + 1;
+        } else if (task.isImportant) {
+            acc['Important'] = (acc['Important'] || 0) + 1;
+        } else if (task.isUrgently) {
+            acc['Urgent'] = (acc['Urgent'] || 0) + 1;
+        } else {
+            acc['Regular'] = (acc['Regular'] || 0) + 1;
+        }
+        return acc;
+    }, {});
 
-        return (
-            <div style={{}}>
-                <ResponsiveContainer width="100%" height={400} style={{ alignItems: "center" }}>
-                    <LineChart data={chartData} margin={{ top: 20, right: 20, left: 30, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" strokeWidth={"3px"} dataKey="important" stroke="#8884d8" name="Important Tasks" />
-                        <Line type="monotone" strokeWidth={"3px"} dataKey="urgent" stroke="#82ca9d" name="Urgent Tasks" />
-                        <Line type="monotone" strokeWidth={"3px"} dataKey="importantUrgent" stroke="#ff7300" name="Important & Urgent Tasks" />
-                        <Line type="monotone" strokeWidth={"3px"} dataKey="regular" stroke="#888888" name="Regular Tasks" />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-        );
-    } else {
-        return <></>;
-    }
+    const chartData = Object.keys(aggregatedData).map(key => ({
+        name: key,
+        value: aggregatedData[key],
+    }));
+
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <ResponsiveContainer width="100%" height={400}>
+                <PieChart>
+                    <Pie
+                        data={chartData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={150}
+                        fill="#8884d8"
+                        label
+                    >
+                        {chartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={['#8884d8', '#82ca9d', '#ff7300', '#888888'][index]} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            </ResponsiveContainer>
+        </div>
+    );
 }
 
 const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
@@ -191,7 +178,7 @@ const TaskGraphs: React.FC<TaskGraphsProps> = ({ tasks }) => {
     }
 
     const checkForInsideOfGraph = (tabNumber: number): string => {
-        return mode == tabNumber ? "inside" : "outside"
+        return mode === tabNumber ? "inside" : "outside"
     }
 
     return (
