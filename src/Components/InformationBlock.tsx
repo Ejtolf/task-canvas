@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Task from "./Task";
 import CompletedStatuses from "./CompletedStatuses";
-
 import "../Styles/InformationBlock.css";
-
 
 interface InformationBlockProps {
     tasks?: Task[];
@@ -29,6 +27,28 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
         return () => clearInterval(interval);
     }, []);
 
+    // Calculate tasks for today and tomorrow
+    useEffect(() => {
+        if (tasks) {
+            const todayStart = new Date(today.setHours(0, 0, 0, 0));
+            const tomorrowStart = new Date(todayStart);
+            tomorrowStart.setDate(todayStart.getDate() + 1);
+
+            const tasksForToday = tasks.filter(task => {
+                const taskDate = task.generationTime ? new Date(task.generationTime) : null;
+                return taskDate && taskDate >= todayStart && taskDate < tomorrowStart;
+            });
+
+            const tasksForTomorrow = tasks.filter(task => {
+                const taskDate = task.generationTime ? new Date(task.generationTime) : null;
+                return taskDate && taskDate >= tomorrowStart && taskDate < new Date(tomorrowStart.setDate(tomorrowStart.getDate() + 1));
+            });
+
+            setNumberOfTasksForToday(tasksForToday.length);
+            setNumberOfTasksForTomorrow(tasksForTomorrow.length);
+        }
+    }, [tasks, today]);
+
     const numberOfTasksLeft = () => {
         // List of undone tasks.
         return tasks?.filter((task) => task.isCompleted === CompletedStatuses[0] || task.isCompleted === CompletedStatuses[1]);
@@ -40,8 +60,8 @@ const InformationBlock: React.FC<InformationBlockProps> = ({ tasks }) => {
                 <p className="information-panel-text">Tasks: {tasks?.length}</p>
                 <p className="information-panel-text">Tasks for today: {numberOfTasksForToday}</p>
                 <p className="information-panel-text">Tasks for tomorrow: {numberOfTasksForTomorrow}</p>
-                <p className={numberOfTasksLeft()?.length == 0 ? "all-tasks-done-text information-panel-text" : "information-panel-text"}>{
-                    (numberOfTasksLeft()?.length == 0) ?
+                <p className={numberOfTasksLeft()?.length === 0 ? "all-tasks-done-text information-panel-text" : "information-panel-text"}>{
+                    (numberOfTasksLeft()?.length === 0) ?
                         "All tasks done." :
                         `Tasks left: ${numberOfTasksLeft()?.length}`
                 }</p>
