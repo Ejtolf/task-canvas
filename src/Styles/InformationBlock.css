@@ -2,6 +2,7 @@
   color: #000033;
   overflow-y: scroll;
   height: min-content;
+  /* width: 95%; */
   flex: 1;
 }
 
@@ -14,13 +15,14 @@
   font-family: "SFDigital";
   font-size: 30px;
   color: #000033;
-  margin: 10px 15px 0;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 .information-panel-text:hover {
   background-color: #c5cfda;
-  text-shadow: none;
-  transition: background-color 0.3s ease-in;
+  text-shadow: 0 0 10px white;
+  transition: all 0.3s ease-in;
 }
 
 .left-column,
@@ -33,18 +35,18 @@
   color: #000033;
 }
 
-.informationBlock {
-  float: right;
-  position: sticky;
-  bottom: 0;
-}
-
 .all-tasks-done-text {
-  animation: AllTasksDoneHasBeenAppeared 0.5s ease-in forwards;
+  animation: AllTasksHasBeenAppeared 0.5s ease-in forwards;
 }
 
 @keyframes AllTasksDoneHasBeenAppeared {
   from {
     text-shadow: 0 0 10px green;
+  }
+}
+
+@media (max-width: 768px) {
+  .informationBlock {
+    display: none;
   }
 }

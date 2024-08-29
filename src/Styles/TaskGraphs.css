@@ -124,3 +124,59 @@
   background-color: #e0e0e0;
   transition: background-color 0.2s ease-in-out;
 }
+
+@media (max-width: 1024px) {
+  .kanban-board {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .column {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .graphs-header-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .graphs-header-buttons button {
+    font-size: 14px;
+    padding: 8px 16px;
+    margin: 0;
+  }
+
+  .kanban-board {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .eisenhower-matrix {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .em-statistics-part {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .graphs-header-buttons button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .task {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .kanban-header-h2-todo,
+  .kanban-header-h2-in-process,
+  .kanban-header-h2-done {
+    font-size: 16px;
+  }
+}

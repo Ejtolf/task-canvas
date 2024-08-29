@@ -161,3 +161,73 @@
 .PrivateSwitchBase-input {
   background-color: blue;
 }
+
+@media (max-width: 768px) {
+  .tasksCalendar {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .new-task-form {
+    height: auto;
+  }
+
+  .task-title-input {
+    font-size: 18px;
+  }
+
+  .deadline-input {
+    font-size: 14px;
+  }
+
+  .new-task-buttons-span {
+    flex-direction: column;
+  }
+
+  .left-section,
+  .right-section {
+    flex-direction: column;
+    max-height: none;
+    margin-right: 0;
+  }
+
+  .title-input {
+    max-width: 100%;
+    font-size: 16px;
+  }
+
+  .deadline-input {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-title-input {
+    font-size: 16px;
+    height: 35px;
+  }
+
+  .deadline-input {
+    font-size: 12px;
+  }
+
+  .new-task-buttons-span {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .left-section,
+  .right-section {
+    flex-direction: column;
+    max-height: none;
+    margin-right: 0;
+  }
+
+  .title-input {
+    font-size: 14px;
+  }
+
+  .deadline-input {
+    font-size: 12px;
+  }
+}

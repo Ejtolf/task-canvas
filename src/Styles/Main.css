@@ -25,22 +25,53 @@
   flex: 1;
   width: 100%;
   animation: hasBeenAppeared 0.5s ease-in forwards;
+  flex-direction: column;
 }
 
 .higher {
   display: flex;
-  /* flex: 1; */
+  flex: 1;
   width: 100%;
+  flex-direction: column;
 }
 
 .info-span,
 .tasks-span {
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
-  /* height: 100vh; */
 }
 
 .info-span {
   display: grid;
-  height: 100vh;
+  height: auto;
+}
+
+@media (min-width: 481px) {
+  .content-inside {
+    flex-direction: row;
+  }
+
+  .info-span,
+  .tasks-span {
+    width: 50%;
+    height: 100vh;
+  }
+
+  .info-span {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-inside {
+    flex-direction: column;
+  }
+
+  .info-span {
+    display: none; 
+  }
+
+  .tasks-span {
+    height: auto;
+  }
 }
